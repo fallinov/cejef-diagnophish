@@ -18,17 +18,17 @@ tailwind.config = {
         extend: {
             colors: {
                 cejef: {
-                    primary: '#0F2A44',
+                    primary: '#9A211F',
                     accent: '#C62828',
-                    bg: '#F4F6F8',
-                    text: '#1F2933',
-                    muted: '#6B7280'
+                    bg: '#FFFFFF',
+                    text: '#111827',
+                    muted: '#4B5563'
                 },
-                score: {
-                    green: '#16a34a',
-                    yellow: '#ca8a04',
-                    orange: '#ea580c',
-                    red: '#dc2626'
+                state: {
+                    info: '#2563EB',
+                    success: '#1D7A3F',
+                    warning: '#946017',
+                    error: '#C62828'
                 }
             }
         }
@@ -37,13 +37,13 @@ tailwind.config = {
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 html { scroll-behavior: smooth; }
 body { font-family: 'Inter', sans-serif; }
 .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
 .progress-bar { transition: width 0.3s ease-out; }
-.nav-link.active { color: #0F2A44; font-weight: 600; }
+.nav-link.active { color: #9A211F; font-weight: 600; }
 
 /* Gauge */
 .gauge { position:relative; width:120px; height:60px; overflow:hidden; }
@@ -56,15 +56,15 @@ body { font-family: 'Inter', sans-serif; }
 .gauge-fill {
     position:absolute; top:0; left:0; width:120px; height:120px;
     border-radius:50%; border:12px solid transparent;
-    border-top-color: var(--gauge-color, #0F2A44);
-    border-left-color: var(--gauge-color, #0F2A44);
+    border-top-color: var(--gauge-color, #9A211F);
+    border-left-color: var(--gauge-color, #9A211F);
     transform: rotate(calc(-90deg + var(--gauge-pct, 0) * 1.8deg));
     box-sizing:border-box;
     transition: transform 1s ease-out;
 }
 .gauge-value {
     position:absolute; bottom:0; left:50%; transform:translateX(-50%);
-    font-size:1.5rem; font-weight:800; color: var(--gauge-color, #0F2A44);
+    font-size:1.5rem; font-weight:800; color: var(--gauge-color, #9A211F);
 }
 
 /* Bar chart */
@@ -84,7 +84,7 @@ body { font-family: 'Inter', sans-serif; }
 /* Table styling */
 .data-table { width:100%; border-collapse:separate; border-spacing:0; }
 .data-table thead th {
-    background:#0F2A44; color:white; padding:10px 14px;
+    background:#9A211F; color:white; padding:10px 14px;
     font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;
     text-align:left;
 }
@@ -96,11 +96,10 @@ body { font-family: 'Inter', sans-serif; }
 .data-table tbody tr:last-child td:last-child { border-radius:0 0 8px 0; }
 .data-table .row-total { background:#f0f4f8; font-weight:700; }
 
-/* Score color coding */
-.score-high { color:#16a34a; font-weight:700; }
-.score-mid { color:#ca8a04; font-weight:700; }
-.score-low { color:#ea580c; font-weight:700; }
-.score-danger { color:#dc2626; font-weight:700; }
+/* Score color coding — charte officielle */
+.score-high { color:#1D7A3F; font-weight:700; }
+.score-mid { color:#946017; font-weight:700; }
+.score-low { color:#C62828; font-weight:700; }
 
 /* Card */
 .stat-card {
@@ -124,7 +123,7 @@ body { font-family: 'Inter', sans-serif; }
 }
 
 /* Focus */
-a:focus-visible, button:focus-visible { outline:2px solid #0F2A44; outline-offset:2px; border-radius:4px; }
+a:focus-visible, button:focus-visible { outline:2px solid #9A211F; outline-offset:2px; border-radius:4px; }
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration:0.01ms!important; transition-duration:0.01ms!important; }
@@ -138,7 +137,7 @@ details summary::before { content:'▶'; display:inline-block; margin-right:8px;
 details[open] summary::before { transform:rotate(90deg); }
 </style>
 </head>
-<body class="bg-cejef-bg text-cejef-text">
+<body class="bg-white text-cejef-text">
 
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-cejef-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
     Aller au contenu principal
@@ -187,7 +186,7 @@ details[open] summary::before { transform:rotate(90deg); }
         <div class="flex items-center justify-center gap-3 mb-4">
             <svg class="w-10 h-10 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
         </div>
-        <h1 class="text-4xl font-extrabold mb-2">DiagnoPhish</h1>
+        <h1 class="text-3xl font-bold mb-2">DiagnoPhish</h1>
         <p class="text-xl opacity-90 mb-1">Rapport de synthèse — Campagnes 2024-2026</p>
         <p class="opacity-70 mb-6">Centre numérique CEJEF &middot; Navixia SA &middot; Mise à jour : 27 mars 2026</p>
         <div class="flex flex-wrap justify-center gap-4">
@@ -199,10 +198,10 @@ details[open] summary::before { transform:rotate(90deg); }
 </section>
 
 <!-- Overview -->
-<section id="overview" class="py-16 bg-white">
+<section id="overview" class="py-16 bg-gray-50">
     <div class="max-w-6xl mx-auto px-6">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Vue d'ensemble</h2>
+            <h2 class="text-2xl font-bold mb-3">Vue d'ensemble</h2>
             <p class="text-gray-600 text-lg">Les 4 trails de sensibilisation et leurs tests de phishing</p>
         </div>
 
@@ -215,7 +214,7 @@ details[open] summary::before { transform:rotate(90deg); }
                 </div>
                 <p class="text-xs text-gray-500 mb-3">Sept – Nov 2024 &middot; 341 participants</p>
                 <div class="text-xs text-gray-500 mb-1">Score phishing</div>
-                <div class="text-3xl font-extrabold text-score-green">73%</div>
+                <div class="text-3xl font-bold text-state-success">73%</div>
                 <div class="mt-3 flex gap-2 text-xs">
                     <span class="pill bg-orange-100 text-orange-700">21% clics</span>
                     <span class="pill bg-red-100 text-red-700">14% données</span>
@@ -229,7 +228,7 @@ details[open] summary::before { transform:rotate(90deg); }
                 </div>
                 <p class="text-xs text-gray-500 mb-3">Déc 2024 – Mars 2025 &middot; 322 part.</p>
                 <div class="text-xs text-gray-500 mb-1">Score phishing</div>
-                <div class="text-3xl font-extrabold text-score-yellow">59%</div>
+                <div class="text-3xl font-bold text-state-warning">59%</div>
                 <div class="mt-3 flex gap-2 text-xs">
                     <span class="pill bg-orange-100 text-orange-700">33% clics</span>
                     <span class="pill bg-red-100 text-red-700">23% données</span>
@@ -244,7 +243,7 @@ details[open] summary::before { transform:rotate(90deg); }
                 </div>
                 <p class="text-xs text-gray-500 mb-3">Mars – Juin 2025 &middot; 322 part.</p>
                 <div class="text-xs text-gray-500 mb-1">Score phishing</div>
-                <div class="text-3xl font-extrabold text-score-yellow">61%</div>
+                <div class="text-3xl font-bold text-state-warning">61%</div>
                 <div class="mt-3 flex gap-2 text-xs">
                     <span class="pill bg-orange-100 text-orange-700">39% clics</span>
                     <span class="pill bg-red-100 text-red-700">16% données</span>
@@ -259,7 +258,7 @@ details[open] summary::before { transform:rotate(90deg); }
                 </div>
                 <p class="text-xs text-gray-500 mb-3">Nov 2025 – Fév 2026 &middot; 302 part.</p>
                 <div class="text-xs text-gray-500 mb-1">Score phishing</div>
-                <div class="text-3xl font-extrabold text-score-red">56%</div>
+                <div class="text-3xl font-bold text-state-error">56%</div>
                 <div class="mt-3 flex gap-2 text-xs">
                     <span class="pill bg-orange-100 text-orange-700">36% clics</span>
                     <span class="pill bg-red-100 text-red-700">25% données</span>
@@ -269,16 +268,16 @@ details[open] summary::before { transform:rotate(90deg); }
         </div>
 
         <!-- Big trend -->
-        <div class="bg-gray-50 rounded-2xl p-8 text-center border border-gray-200">
+        <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-200">
             <p class="text-sm text-gray-500 uppercase font-semibold tracking-wider mb-2">Évolution score de sécurité phishing</p>
-            <div class="flex items-center justify-center gap-4 text-4xl font-extrabold">
-                <span class="text-score-green">73%</span>
+            <div class="flex items-center justify-center gap-4 text-3xl font-bold">
+                <span class="text-state-success">73%</span>
                 <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                <span class="text-score-yellow">59%</span>
+                <span class="text-state-warning">59%</span>
                 <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                <span class="text-score-yellow">61%</span>
+                <span class="text-state-warning">61%</span>
                 <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                <span class="text-score-red">56%</span>
+                <span class="text-state-error">56%</span>
             </div>
             <p class="text-cejef-accent font-bold mt-3 text-lg">↓ 17 points en 4 campagnes</p>
         </div>
@@ -289,11 +288,11 @@ details[open] summary::before { transform:rotate(90deg); }
 <section id="participation" class="py-16">
     <div class="max-w-6xl mx-auto px-6">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Participation aux activités</h2>
+            <h2 class="text-2xl font-bold mb-3">Participation aux activités</h2>
             <p class="text-gray-600 text-lg">Taux d'inactifs par division — évolution positive</p>
         </div>
 
-        <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm mb-8">
+        <div class="bg-white rounded-xl p-8 border border-gray-200 shadow-sm mb-8">
             <h3 class="font-bold text-lg mb-6">Taux d'inactifs par trail</h3>
             <div class="overflow-x-auto">
                 <table class="data-table">
@@ -320,7 +319,7 @@ details[open] summary::before { transform:rotate(90deg); }
         </div>
 
         <!-- Visual bars -->
-        <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
+        <div class="bg-white rounded-xl p-8 border border-gray-200 shadow-sm">
             <h3 class="font-bold text-lg mb-6">Évolution visuelle — Inactifs CEJEF</h3>
             <div class="space-y-4">
                 <div>
@@ -350,10 +349,10 @@ details[open] summary::before { transform:rotate(90deg); }
 </section>
 
 <!-- Phishing -->
-<section id="phishing" class="py-16 bg-white">
+<section id="phishing" class="py-16 bg-gray-50">
     <div class="max-w-6xl mx-auto px-6">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Résultats des tests de phishing</h2>
+            <h2 class="text-2xl font-bold mb-3">Résultats des tests de phishing</h2>
             <p class="text-gray-600 text-lg">4 simulations, des résultats en baisse constante</p>
         </div>
 
@@ -382,7 +381,7 @@ details[open] summary::before { transform:rotate(90deg); }
         </div>
 
         <!-- Main comparison table -->
-        <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200 mb-8">
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-200 mb-8">
             <h3 class="font-bold text-lg mb-6">Comparaison des 4 campagnes phishing — CEJEF</h3>
             <div class="overflow-x-auto">
                 <table class="data-table">
@@ -408,7 +407,7 @@ details[open] summary::before { transform:rotate(90deg); }
 
         <!-- Visual comparison bars -->
         <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+            <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
                 <h4 class="font-bold mb-4">Liens cliqués — évolution</h4>
                 <div class="space-y-3">
                     <div><div class="flex justify-between text-sm mb-1"><span>Phishing 1</span><span class="font-bold">21%</span></div><div class="w-full bg-gray-200 rounded-full h-5"><div class="bar-h bg-blue-500" style="width:21%"></div></div></div>
@@ -417,7 +416,7 @@ details[open] summary::before { transform:rotate(90deg); }
                     <div><div class="flex justify-between text-sm mb-1"><span>Phishing 4</span><span class="font-bold text-red-600">36%</span></div><div class="w-full bg-gray-200 rounded-full h-5"><div class="bar-h bg-red-600" style="width:36%"></div></div></div>
                 </div>
             </div>
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+            <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
                 <h4 class="font-bold mb-4">Données saisies — évolution</h4>
                 <div class="space-y-3">
                     <div><div class="flex justify-between text-sm mb-1"><span>Phishing 1</span><span class="font-bold">14%</span></div><div class="w-full bg-gray-200 rounded-full h-5"><div class="bar-h bg-blue-500" style="width:28%"></div></div></div>
@@ -435,11 +434,11 @@ details[open] summary::before { transform:rotate(90deg); }
 <section id="divisions" class="py-16">
     <div class="max-w-6xl mx-auto px-6">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Scores phishing par division</h2>
+            <h2 class="text-2xl font-bold mb-3">Scores phishing par division</h2>
             <p class="text-gray-600 text-lg">Évolution du score de sécurité sur les 4 campagnes</p>
         </div>
 
-        <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm mb-8">
+        <div class="bg-white rounded-xl p-8 border border-gray-200 shadow-sm mb-8">
             <div class="overflow-x-auto">
                 <table class="data-table">
                     <thead>
@@ -468,35 +467,35 @@ details[open] summary::before { transform:rotate(90deg); }
         <!-- Moyennes par division -->
         <div class="grid md:grid-cols-5 gap-4 mb-8">
             <div class="stat-card text-center">
-                <div class="font-extrabold text-lg">DIVART</div>
-                <div class="text-2xl font-extrabold mt-1">61%</div>
+                <div class="font-bold text-lg">DIVART</div>
+                <div class="text-2xl font-bold mt-1">61%</div>
                 <p class="text-xs text-gray-500 mt-1">Δ -12 pts</p>
             </div>
             <div class="stat-card text-center">
-                <div class="font-extrabold text-lg">DIVCOM</div>
-                <div class="text-2xl font-extrabold mt-1">58%</div>
+                <div class="font-bold text-lg">DIVCOM</div>
+                <div class="text-2xl font-bold mt-1">58%</div>
                 <p class="text-xs text-gray-500 mt-1">Δ -34 pts</p>
             </div>
             <div class="stat-card text-center">
-                <div class="font-extrabold text-lg">DIVLYC</div>
-                <div class="text-2xl font-extrabold mt-1">64%</div>
+                <div class="font-bold text-lg">DIVLYC</div>
+                <div class="text-2xl font-bold mt-1">64%</div>
                 <p class="text-xs text-gray-500 mt-1">Δ -14 pts</p>
             </div>
             <div class="stat-card text-center">
-                <div class="font-extrabold text-lg">DIVSSA</div>
-                <div class="text-2xl font-extrabold mt-1">61%</div>
+                <div class="font-bold text-lg">DIVSSA</div>
+                <div class="text-2xl font-bold mt-1">61%</div>
                 <p class="text-xs text-gray-500 mt-1">Δ -18 pts</p>
             </div>
             <div class="stat-card text-center">
-                <div class="font-extrabold text-lg">DIVTEC</div>
-                <div class="text-2xl font-extrabold mt-1">67%</div>
+                <div class="font-bold text-lg">DIVTEC</div>
+                <div class="text-2xl font-bold mt-1">67%</div>
                 <p class="text-xs text-gray-500 mt-1">Δ -11 pts</p>
             </div>
         </div>
 
         <!-- Liens cliqués par division -->
         <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
+            <div class="bg-white rounded-xl p-8 border border-gray-200 shadow-sm">
                 <h3 class="font-bold text-lg mb-6">Liens cliqués par division</h3>
                 <div class="overflow-x-auto">
                     <table class="data-table">
@@ -512,7 +511,7 @@ details[open] summary::before { transform:rotate(90deg); }
                     </table>
                 </div>
             </div>
-            <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
+            <div class="bg-white rounded-xl p-8 border border-gray-200 shadow-sm">
                 <h3 class="font-bold text-lg mb-6">Données saisies par division</h3>
                 <div class="overflow-x-auto">
                     <table class="data-table">
@@ -533,16 +532,16 @@ details[open] summary::before { transform:rotate(90deg); }
 </section>
 
 <!-- Trails detail -->
-<section id="trails" class="py-16 bg-white">
+<section id="trails" class="py-16 bg-gray-50">
     <div class="max-w-6xl mx-auto px-6">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Détail par trail</h2>
+            <h2 class="text-2xl font-bold mb-3">Détail par trail</h2>
             <p class="text-gray-600 text-lg">Scores des activités de formation (vidéos, quiz) et niveaux de risque</p>
         </div>
 
         <!-- Trail 1 detail -->
-        <details class="bg-gray-50 rounded-2xl border border-gray-200 mb-4">
-            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-2xl transition">
+        <details class="bg-gray-50 rounded-xl border border-gray-200 mb-4">
+            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-xl transition">
                 Trail 1 — Détecter le phishing
                 <span class="text-sm font-normal text-gray-500 ml-2">Sept–Nov 2024 &middot; 341 participants</span>
             </summary>
@@ -565,8 +564,8 @@ details[open] summary::before { transform:rotate(90deg); }
         </details>
 
         <!-- Trail 2 detail -->
-        <details class="bg-gray-50 rounded-2xl border border-gray-200 mb-4">
-            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-2xl transition">
+        <details class="bg-gray-50 rounded-xl border border-gray-200 mb-4">
+            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-xl transition">
                 Trail 2 — Lire les liens internet
                 <span class="text-sm font-normal text-gray-500 ml-2">Déc 2024–Mars 2025 &middot; 322 participants</span>
             </summary>
@@ -589,8 +588,8 @@ details[open] summary::before { transform:rotate(90deg); }
         </details>
 
         <!-- Trail 3 detail -->
-        <details class="bg-gray-50 rounded-2xl border border-gray-200 mb-4">
-            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-2xl transition">
+        <details class="bg-gray-50 rounded-xl border border-gray-200 mb-4">
+            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-xl transition">
                 Trail 3 — SharePoint / Fichiers
                 <span class="text-sm font-normal text-gray-500 ml-2">Mars–Juin 2025 &middot; 322 participants</span>
             </summary>
@@ -612,17 +611,17 @@ details[open] summary::before { transform:rotate(90deg); }
                 </div>
                 <h4 class="font-bold mt-6 mb-3">Niveaux de risque (fin Trail 3)</h4>
                 <div class="grid grid-cols-4 gap-4">
-                    <div class="text-center p-4 bg-green-50 rounded-xl"><div class="text-2xl font-extrabold text-green-700">74%</div><div class="text-xs text-green-600 font-semibold">Avancé</div><div class="text-xs text-gray-500">237 pers.</div></div>
-                    <div class="text-center p-4 bg-yellow-50 rounded-xl"><div class="text-2xl font-extrabold text-yellow-700">20%</div><div class="text-xs text-yellow-600 font-semibold">Intermédiaire</div><div class="text-xs text-gray-500">64 pers.</div></div>
-                    <div class="text-center p-4 bg-red-50 rounded-xl"><div class="text-2xl font-extrabold text-red-700">4%</div><div class="text-xs text-red-600 font-semibold">Haut risque</div><div class="text-xs text-gray-500">14 pers.</div></div>
-                    <div class="text-center p-4 bg-gray-100 rounded-xl"><div class="text-2xl font-extrabold text-gray-500">2%</div><div class="text-xs text-gray-500 font-semibold">Inactif</div><div class="text-xs text-gray-400">6 pers.</div></div>
+                    <div class="text-center p-4 bg-green-50 rounded-xl"><div class="text-2xl font-bold text-green-700">74%</div><div class="text-xs text-green-600 font-semibold">Avancé</div><div class="text-xs text-gray-500">237 pers.</div></div>
+                    <div class="text-center p-4 bg-yellow-50 rounded-xl"><div class="text-2xl font-bold text-yellow-700">20%</div><div class="text-xs text-yellow-600 font-semibold">Intermédiaire</div><div class="text-xs text-gray-500">64 pers.</div></div>
+                    <div class="text-center p-4 bg-red-50 rounded-xl"><div class="text-2xl font-bold text-red-700">4%</div><div class="text-xs text-red-600 font-semibold">Haut risque</div><div class="text-xs text-gray-500">14 pers.</div></div>
+                    <div class="text-center p-4 bg-gray-100 rounded-xl"><div class="text-2xl font-bold text-gray-500">2%</div><div class="text-xs text-gray-500 font-semibold">Inactif</div><div class="text-xs text-gray-400">6 pers.</div></div>
                 </div>
             </div>
         </details>
 
         <!-- Trail 4 detail -->
-        <details open class="bg-gray-50 rounded-2xl border-2 border-cejef-accent mb-4">
-            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-2xl transition">
+        <details open class="bg-gray-50 rounded-xl border-2 border-cejef-accent mb-4">
+            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-xl transition">
                 Trail 4 — Intelligence artificielle
                 <span class="text-sm font-normal text-gray-500 ml-2">Nov 2025–Fév 2026 &middot; 302 participants</span>
                 <span class="pill bg-red-100 text-red-700 ml-2">Dernier</span>
@@ -661,10 +660,10 @@ details[open] summary::before { transform:rotate(90deg); }
 
                 <h4 class="font-bold mt-6 mb-3">Niveaux de risque (fin Trail 4)</h4>
                 <div class="grid grid-cols-4 gap-4">
-                    <div class="text-center p-4 bg-green-50 rounded-xl"><div class="text-2xl font-extrabold text-green-700">76%</div><div class="text-xs text-green-600 font-semibold">Avancé</div><div class="text-xs text-gray-500">230 pers.</div></div>
-                    <div class="text-center p-4 bg-yellow-50 rounded-xl"><div class="text-2xl font-extrabold text-yellow-700">20%</div><div class="text-xs text-yellow-600 font-semibold">Intermédiaire</div><div class="text-xs text-gray-500">59 pers.</div></div>
-                    <div class="text-center p-4 bg-red-50 rounded-xl"><div class="text-2xl font-extrabold text-red-700">3%</div><div class="text-xs text-red-600 font-semibold">Haut risque</div><div class="text-xs text-gray-500">9 pers.</div></div>
-                    <div class="text-center p-4 bg-gray-100 rounded-xl"><div class="text-2xl font-extrabold text-gray-500">1%</div><div class="text-xs text-gray-500 font-semibold">Inactif</div><div class="text-xs text-gray-400">4 pers.</div></div>
+                    <div class="text-center p-4 bg-green-50 rounded-xl"><div class="text-2xl font-bold text-green-700">76%</div><div class="text-xs text-green-600 font-semibold">Avancé</div><div class="text-xs text-gray-500">230 pers.</div></div>
+                    <div class="text-center p-4 bg-yellow-50 rounded-xl"><div class="text-2xl font-bold text-yellow-700">20%</div><div class="text-xs text-yellow-600 font-semibold">Intermédiaire</div><div class="text-xs text-gray-500">59 pers.</div></div>
+                    <div class="text-center p-4 bg-red-50 rounded-xl"><div class="text-2xl font-bold text-red-700">3%</div><div class="text-xs text-red-600 font-semibold">Haut risque</div><div class="text-xs text-gray-500">9 pers.</div></div>
+                    <div class="text-center p-4 bg-gray-100 rounded-xl"><div class="text-2xl font-bold text-gray-500">1%</div><div class="text-xs text-gray-500 font-semibold">Inactif</div><div class="text-xs text-gray-400">4 pers.</div></div>
                 </div>
             </div>
         </details>
@@ -675,7 +674,7 @@ details[open] summary::before { transform:rotate(90deg); }
 <section id="constats" class="py-16">
     <div class="max-w-6xl mx-auto px-6">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Constats et recommandations</h2>
+            <h2 class="text-2xl font-bold mb-3">Constats et recommandations</h2>
             <p class="text-gray-600 text-lg">Analyse des tendances après 4 campagnes</p>
         </div>
 
@@ -714,7 +713,7 @@ details[open] summary::before { transform:rotate(90deg); }
         </div>
 
         <!-- Recommandations Navixia -->
-        <div class="bg-cejef-primary text-white rounded-2xl p-8">
+        <div class="bg-cejef-primary text-white rounded-xl p-8">
             <h3 class="font-bold text-xl mb-4">Recommandations Navixia</h3>
             <ul class="space-y-3 text-sm">
                 <li class="flex items-start gap-3">
