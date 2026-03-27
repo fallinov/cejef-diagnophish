@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 40" fill="none">
+  <!-- Barres CEJEF -->
+  <rect x="2" y="4" width="8" height="32" rx="4" fill="#8BC34A"/>
+  <rect x="14" y="4" width="8" height="32" rx="4" fill="#FFC107"/>
+  <rect x="26" y="4" width="8" height="32" rx="4" fill="#FF9800"/>
+  <rect x="38" y="4" width="8" height="32" rx="4" fill="#E91E63"/>
+  <rect x="50" y="4" width="8" height="32" rx="4" fill="#0F2A44"/>
+  <!-- Texte CEJEF -->
+  <text x="70" y="28" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#0F2A44">CEJEF</text>
+</svg>
