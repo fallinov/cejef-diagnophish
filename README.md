@@ -2,16 +2,15 @@
 
 Rapport comparatif des 4 campagnes de sensibilisation au phishing DiagnoPhish (Navixia SA) pour le CEJEF.
 
-## Contenu
+## Pages
 
-- Trails 1 à 4 (septembre 2024 – mars 2026)
-- Résultats des tests de phishing par division (5 divisions)
-- Évolution de la participation et des inactifs
-- Analyse et recommandations Navixia
+- **Rapport DiagnoPhish** — Synthèse des 4 campagnes phishing (trails 1-4, sept 2024 – mars 2026)
+- **Charte graphique** — Palette, typographie, logos et règles d'utilisation CEJEF
 
 ## Accès
 
-Page publiée via GitHub Pages : `https://fallinov.github.io/cejef-diagnophish/`
+- Rapport : `https://fallinov.github.io/cejef-diagnophish/`
+- Charte graphique : `https://fallinov.github.io/cejef-diagnophish/charte-graphique.html`
 
 ## Données sources
 
