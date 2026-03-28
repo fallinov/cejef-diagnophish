@@ -9,7 +9,7 @@
 <meta property="og:title" content="DiagnoPhish — Rapport de synthèse | CEJEF">
 <meta property="og:description" content="Analyse comparative des 4 campagnes de sensibilisation au phishing DiagnoPhish du CEJEF.">
 <meta property="og:image" content="img/logo-cejef.webp">
-<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="img/icon-cejef.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
 <script src="libs/tailwind.js"></script>
 <script>
@@ -18,11 +18,19 @@ tailwind.config = {
         extend: {
             colors: {
                 cejef: {
-                    primary: '#0F2A44',
-                    accent: '#C62828',
-                    bg: '#F4F6F8',
-                    text: '#1F2933',
-                    muted: '#6B7280'
+                    primary: '#003865',
+                    dark: '#1A171B',
+                    gray: '#878787',
+                    border: '#B0B1B3',
+                    bg: '#F5F5F5',
+                    white: '#FFFFFF'
+                },
+                div: {
+                    art: '#003865',
+                    com: '#0053A1',
+                    lyc: '#F28C00',
+                    ssa: '#CAD400',
+                    tec: '#DF006E'
                 },
                 score: {
                     green: '#16a34a',
@@ -30,12 +38,24 @@ tailwind.config = {
                     orange: '#ea580c',
                     red: '#dc2626'
                 }
+            },
+            fontFamily: {
+                heading: ['Montserrat', 'sans-serif'],
+                body: ['Inter', 'sans-serif']
             }
         }
     }
 }
 </script>
 <style>
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600 700;
+    font-display: swap;
+    src: url('fonts/montserrat-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 @font-face {
     font-family: 'Inter';
     font-style: normal;
@@ -47,32 +67,11 @@ tailwind.config = {
 </style>
 <style>
 html { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; }
+body { font-family: 'Inter', sans-serif; color: #1A171B; line-height: 1.5; }
+h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; line-height: 1.2; }
 .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
 .progress-bar { transition: width 0.3s ease-out; }
-.nav-link.active { color: #0F2A44; font-weight: 600; }
-
-/* Gauge */
-.gauge { position:relative; width:120px; height:60px; overflow:hidden; }
-.gauge::before {
-    content:''; display:block; width:120px; height:120px;
-    border-radius:50%; border:12px solid #e5e7eb;
-    border-bottom-color:transparent; border-right-color:transparent;
-    transform:rotate(-90deg); box-sizing:border-box;
-}
-.gauge-fill {
-    position:absolute; top:0; left:0; width:120px; height:120px;
-    border-radius:50%; border:12px solid transparent;
-    border-top-color: var(--gauge-color, #0F2A44);
-    border-left-color: var(--gauge-color, #0F2A44);
-    transform: rotate(calc(-90deg + var(--gauge-pct, 0) * 1.8deg));
-    box-sizing:border-box;
-    transition: transform 1s ease-out;
-}
-.gauge-value {
-    position:absolute; bottom:0; left:50%; transform:translateX(-50%);
-    font-size:1.5rem; font-weight:800; color: var(--gauge-color, #0F2A44);
-}
+.nav-link.active { color: #003865; font-weight: 600; }
 
 /* Bar chart */
 .bar-h { height:28px; border-radius:4px; transition: width 0.8s ease-out; min-width:2px; }
@@ -89,19 +88,16 @@ body { font-family: 'Inter', sans-serif; }
 }
 
 /* Table styling */
-.data-table { width:100%; border-collapse:separate; border-spacing:0; }
+.data-table { width:100%; border-collapse:collapse; }
 .data-table thead th {
-    background:#0F2A44; color:white; padding:10px 14px;
+    background:#003865; color:white; padding:10px 14px;
+    font-family: 'Montserrat', sans-serif;
     font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;
-    text-align:left;
+    text-align:left; border:1px solid #003865;
 }
-.data-table thead th:first-child { border-radius:8px 0 0 0; }
-.data-table thead th:last-child { border-radius:0 8px 0 0; }
-.data-table tbody td { padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:0.9rem; }
-.data-table tbody tr:hover { background:#f0f4f8; }
-.data-table tbody tr:last-child td:first-child { border-radius:0 0 0 8px; }
-.data-table tbody tr:last-child td:last-child { border-radius:0 0 8px 0; }
-.data-table .row-total { background:#f0f4f8; font-weight:700; }
+.data-table tbody td { padding:10px 14px; border:1px solid #B0B1B3; font-size:0.9rem; }
+.data-table tbody tr:hover { background:#F5F5F5; }
+.data-table .row-total { background:#F5F5F5; font-weight:700; }
 
 /* Score color coding */
 .score-high { color:#16a34a; font-weight:700; }
@@ -109,13 +105,11 @@ body { font-family: 'Inter', sans-serif; }
 .score-low { color:#ea580c; font-weight:700; }
 .score-danger { color:#dc2626; font-weight:700; }
 
-/* Card */
+/* Card — charte: pas de shadow, pas de hover transform */
 .stat-card {
-    background:white; border-radius:12px; padding:24px;
-    border:1px solid #e5e7eb; box-shadow:0 1px 3px rgba(0,0,0,0.06);
-    transition: box-shadow 0.2s, transform 0.2s;
+    background:white; border-radius:8px; padding:24px;
+    border:1px solid #B0B1B3;
 }
-.stat-card:hover { box-shadow:0 8px 25px rgba(0,0,0,0.08); transform:translateY(-2px); }
 
 /* Pill */
 .pill {
@@ -127,11 +121,11 @@ body { font-family: 'Inter', sans-serif; }
 @media print {
     header, #back-to-top, .no-print { display:none !important; }
     section { page-break-inside:avoid; }
-    .stat-card { box-shadow:none; border:1px solid #ccc; }
+    .stat-card { border:1px solid #B0B1B3; }
 }
 
 /* Focus */
-a:focus-visible, button:focus-visible { outline:2px solid #0F2A44; outline-offset:2px; border-radius:4px; }
+a:focus-visible, button:focus-visible { outline:2px solid #003865; outline-offset:2px; border-radius:4px; }
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration:0.01ms!important; transition-duration:0.01ms!important; }
@@ -143,165 +137,168 @@ details summary { cursor:pointer; list-style:none; }
 details summary::-webkit-details-marker { display:none; }
 details summary::before { content:'▶'; display:inline-block; margin-right:8px; transition:transform 0.2s; font-size:0.75rem; }
 details[open] summary::before { transform:rotate(90deg); }
+
+/* Section container */
+.section-container { max-width:72rem; margin:0 auto; padding:0 1.5rem; }
 </style>
 </head>
-<body class="bg-cejef-bg text-cejef-text">
+<body class="bg-[#F5F5F5]">
 
-<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-cejef-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-[#003865] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
     Aller au contenu principal
 </a>
 
 <!-- Progress bar -->
-<div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[60]">
-    <div id="progress-bar" class="progress-bar h-full bg-cejef-primary w-0"></div>
+<div class="fixed top-0 left-0 w-full h-1 bg-[#B0B1B3] z-[60]">
+    <div id="progress-bar" class="progress-bar h-full bg-[#003865] w-0"></div>
 </div>
 
 <!-- Header -->
-<header class="bg-white border-b border-gray-200 sticky top-1 z-50">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+<header class="bg-white border-b border-[#B0B1B3] sticky top-1 z-50">
+    <div class="section-container py-4 flex justify-between items-center">
         <a href="#" class="flex items-center gap-3" aria-label="Retour en haut">
-            <img src="img/logo-cejef.webp" alt="CEJEF — Centre jurassien d'enseignement et de formation" class="h-10">
+            <img src="img/logo-cejef-officiel.svg" alt="CEJEF — Centre jurassien d'enseignement et de formation" class="h-10">
         </a>
         <nav class="hidden md:flex gap-5">
-            <a href="#overview" class="nav-link text-gray-600 hover:text-cejef-primary text-sm font-medium transition-colors">Vue d'ensemble</a>
-            <a href="#participation" class="nav-link text-gray-600 hover:text-cejef-primary text-sm font-medium transition-colors">Participation</a>
-            <a href="#phishing" class="nav-link text-gray-600 hover:text-cejef-primary text-sm font-medium transition-colors">Phishing</a>
-            <a href="#divisions" class="nav-link text-gray-600 hover:text-cejef-primary text-sm font-medium transition-colors">Divisions</a>
-            <a href="#trails" class="nav-link text-gray-600 hover:text-cejef-primary text-sm font-medium transition-colors">Détail trails</a>
-            <a href="#constats" class="nav-link text-gray-600 hover:text-cejef-primary text-sm font-medium transition-colors">Constats</a>
+            <a href="#overview" class="nav-link text-[#878787] hover:text-[#003865] text-sm font-medium transition-colors">Vue d'ensemble</a>
+            <a href="#participation" class="nav-link text-[#878787] hover:text-[#003865] text-sm font-medium transition-colors">Participation</a>
+            <a href="#phishing" class="nav-link text-[#878787] hover:text-[#003865] text-sm font-medium transition-colors">Phishing</a>
+            <a href="#divisions" class="nav-link text-[#878787] hover:text-[#003865] text-sm font-medium transition-colors">Divisions</a>
+            <a href="#trails" class="nav-link text-[#878787] hover:text-[#003865] text-sm font-medium transition-colors">Détail trails</a>
+            <a href="#constats" class="nav-link text-[#878787] hover:text-[#003865] text-sm font-medium transition-colors">Constats</a>
         </nav>
-        <button id="menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-gray-100" aria-label="Ouvrir le menu" aria-expanded="false">
-            <svg class="w-6 h-6 text-cejef-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button id="menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-[#F5F5F5]" aria-label="Ouvrir le menu" aria-expanded="false">
+            <svg class="w-6 h-6 text-[#003865]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
         </button>
     </div>
-    <nav id="mobile-menu" class="hidden md:hidden border-t border-gray-200 px-6 py-4 space-y-3">
-        <a href="#overview" class="block text-gray-600 hover:text-cejef-primary font-medium">Vue d'ensemble</a>
-        <a href="#participation" class="block text-gray-600 hover:text-cejef-primary font-medium">Participation</a>
-        <a href="#phishing" class="block text-gray-600 hover:text-cejef-primary font-medium">Phishing</a>
-        <a href="#divisions" class="block text-gray-600 hover:text-cejef-primary font-medium">Divisions</a>
-        <a href="#trails" class="block text-gray-600 hover:text-cejef-primary font-medium">Détail trails</a>
-        <a href="#constats" class="block text-gray-600 hover:text-cejef-primary font-medium">Constats</a>
+    <nav id="mobile-menu" class="hidden md:hidden border-t border-[#B0B1B3] px-6 py-4 space-y-3">
+        <a href="#overview" class="block text-[#878787] hover:text-[#003865] font-medium">Vue d'ensemble</a>
+        <a href="#participation" class="block text-[#878787] hover:text-[#003865] font-medium">Participation</a>
+        <a href="#phishing" class="block text-[#878787] hover:text-[#003865] font-medium">Phishing</a>
+        <a href="#divisions" class="block text-[#878787] hover:text-[#003865] font-medium">Divisions</a>
+        <a href="#trails" class="block text-[#878787] hover:text-[#003865] font-medium">Détail trails</a>
+        <a href="#constats" class="block text-[#878787] hover:text-[#003865] font-medium">Constats</a>
     </nav>
 </header>
 
 <main id="main-content">
 
-<!-- Hero -->
-<section class="bg-cejef-primary text-white py-16 text-center">
-    <div class="max-w-6xl mx-auto px-6">
+<!-- Hero — fond blanc, sobriété -->
+<section class="bg-white py-16 text-center border-b border-[#B0B1B3]">
+    <div class="section-container">
         <div class="flex items-center justify-center gap-3 mb-4">
-            <svg class="w-10 h-10 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <svg class="w-10 h-10 text-[#003865]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
         </div>
-        <h1 class="text-4xl font-extrabold mb-2">DiagnoPhish</h1>
-        <p class="text-xl opacity-90 mb-1">Rapport de synthèse — Campagnes 2024-2026</p>
-        <p class="opacity-70 mb-6">Centre numérique CEJEF &middot; Navixia SA &middot; Mise à jour : 27 mars 2026</p>
+        <h1 class="font-heading text-[2rem] font-bold text-[#1A171B] mb-2">DiagnoPhish</h1>
+        <p class="text-[1.25rem] text-[#1A171B] mb-1">Rapport de synthèse — Campagnes 2024-2026</p>
+        <p class="text-[0.875rem] text-[#878787] mb-6">Centre numérique CEJEF &middot; Navixia SA &middot; Mise à jour : 27 mars 2026</p>
         <div class="flex flex-wrap justify-center gap-4">
-            <span class="pill bg-white/20 text-white">4 trails de formation</span>
-            <span class="pill bg-white/20 text-white">4 simulations de phishing</span>
-            <span class="pill bg-white/20 text-white">~320 enseignants ciblés</span>
+            <span class="pill bg-[#003865] text-white">4 trails de formation</span>
+            <span class="pill bg-[#003865] text-white">4 simulations de phishing</span>
+            <span class="pill bg-[#003865] text-white">~320 enseignants ciblés</span>
         </div>
     </div>
 </section>
 
 <!-- Overview -->
 <section id="overview" class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-6">
+    <div class="section-container">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Vue d'ensemble</h2>
-            <p class="text-gray-600 text-lg">Les 4 trails de sensibilisation et leurs tests de phishing</p>
+            <h2 class="font-heading text-[1.5rem] font-semibold text-[#003865] mb-3">Vue d'ensemble</h2>
+            <p class="text-[#878787] text-[1rem]">Les 4 trails de sensibilisation et leurs tests de phishing</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <!-- Trail 1 -->
             <div class="stat-card">
                 <div class="flex items-center gap-2 mb-3">
-                    <span class="inline-flex items-center justify-center w-8 h-8 bg-blue-100 text-blue-700 rounded-full text-sm font-bold">1</span>
-                    <h3 class="font-bold text-sm">Détecter le phishing</h3>
+                    <span class="inline-flex items-center justify-center w-8 h-8 bg-[#003865] text-white rounded-full text-sm font-bold font-heading">1</span>
+                    <h3 class="font-heading font-semibold text-[1rem] text-[#1A171B]">Détecter le phishing</h3>
                 </div>
-                <p class="text-xs text-gray-500 mb-3">Sept – Nov 2024 &middot; 341 participants</p>
-                <div class="text-xs text-gray-500 mb-1">Score phishing</div>
-                <div class="text-3xl font-extrabold text-score-green">73%</div>
+                <p class="text-[0.875rem] text-[#878787] mb-3">Sept – Nov 2024 &middot; 341 participants</p>
+                <div class="text-[0.875rem] text-[#878787] mb-1">Score phishing</div>
+                <div class="text-3xl font-extrabold text-[#16a34a]">73%</div>
                 <div class="mt-3 flex gap-2 text-xs">
-                    <span class="pill bg-orange-100 text-orange-700">21% clics</span>
-                    <span class="pill bg-red-100 text-red-700">14% données</span>
+                    <span class="pill bg-orange-100 text-[#ea580c]">21% clics</span>
+                    <span class="pill bg-red-100 text-[#dc2626]">14% données</span>
                 </div>
             </div>
             <!-- Trail 2 -->
             <div class="stat-card">
                 <div class="flex items-center gap-2 mb-3">
-                    <span class="inline-flex items-center justify-center w-8 h-8 bg-purple-100 text-purple-700 rounded-full text-sm font-bold">2</span>
-                    <h3 class="font-bold text-sm">Lire les liens internet</h3>
+                    <span class="inline-flex items-center justify-center w-8 h-8 bg-[#003865] text-white rounded-full text-sm font-bold font-heading">2</span>
+                    <h3 class="font-heading font-semibold text-[1rem] text-[#1A171B]">Lire les liens internet</h3>
                 </div>
-                <p class="text-xs text-gray-500 mb-3">Déc 2024 – Mars 2025 &middot; 322 part.</p>
-                <div class="text-xs text-gray-500 mb-1">Score phishing</div>
-                <div class="text-3xl font-extrabold text-score-yellow">59%</div>
+                <p class="text-[0.875rem] text-[#878787] mb-3">Déc 2024 – Mars 2025 &middot; 322 part.</p>
+                <div class="text-[0.875rem] text-[#878787] mb-1">Score phishing</div>
+                <div class="text-3xl font-extrabold text-[#ca8a04]">59%</div>
                 <div class="mt-3 flex gap-2 text-xs">
-                    <span class="pill bg-orange-100 text-orange-700">33% clics</span>
-                    <span class="pill bg-red-100 text-red-700">23% données</span>
+                    <span class="pill bg-orange-100 text-[#ea580c]">33% clics</span>
+                    <span class="pill bg-red-100 text-[#dc2626]">23% données</span>
                 </div>
-                <div class="mt-2 text-xs text-red-600 font-semibold">↓ 14 pts</div>
+                <div class="mt-2 text-xs text-[#dc2626] font-semibold">↓ 14 pts</div>
             </div>
             <!-- Trail 3 -->
             <div class="stat-card">
                 <div class="flex items-center gap-2 mb-3">
-                    <span class="inline-flex items-center justify-center w-8 h-8 bg-teal-100 text-teal-700 rounded-full text-sm font-bold">3</span>
-                    <h3 class="font-bold text-sm">SharePoint / Fichiers</h3>
+                    <span class="inline-flex items-center justify-center w-8 h-8 bg-[#003865] text-white rounded-full text-sm font-bold font-heading">3</span>
+                    <h3 class="font-heading font-semibold text-[1rem] text-[#1A171B]">SharePoint / Fichiers</h3>
                 </div>
-                <p class="text-xs text-gray-500 mb-3">Mars – Juin 2025 &middot; 322 part.</p>
-                <div class="text-xs text-gray-500 mb-1">Score phishing</div>
-                <div class="text-3xl font-extrabold text-score-yellow">61%</div>
+                <p class="text-[0.875rem] text-[#878787] mb-3">Mars – Juin 2025 &middot; 322 part.</p>
+                <div class="text-[0.875rem] text-[#878787] mb-1">Score phishing</div>
+                <div class="text-3xl font-extrabold text-[#ca8a04]">61%</div>
                 <div class="mt-3 flex gap-2 text-xs">
-                    <span class="pill bg-orange-100 text-orange-700">39% clics</span>
-                    <span class="pill bg-red-100 text-red-700">16% données</span>
+                    <span class="pill bg-orange-100 text-[#ea580c]">39% clics</span>
+                    <span class="pill bg-red-100 text-[#dc2626]">16% données</span>
                 </div>
-                <div class="mt-2 text-xs text-green-600 font-semibold">↑ 2 pts</div>
+                <div class="mt-2 text-xs text-[#16a34a] font-semibold">↑ 2 pts</div>
             </div>
             <!-- Trail 4 -->
-            <div class="stat-card border-2 border-cejef-accent">
+            <div class="stat-card border-2 border-[#dc2626]">
                 <div class="flex items-center gap-2 mb-3">
-                    <span class="inline-flex items-center justify-center w-8 h-8 bg-red-100 text-red-700 rounded-full text-sm font-bold">4</span>
-                    <h3 class="font-bold text-sm">Intelligence artificielle</h3>
+                    <span class="inline-flex items-center justify-center w-8 h-8 bg-[#dc2626] text-white rounded-full text-sm font-bold font-heading">4</span>
+                    <h3 class="font-heading font-semibold text-[1rem] text-[#1A171B]">Intelligence artificielle</h3>
                 </div>
-                <p class="text-xs text-gray-500 mb-3">Nov 2025 – Fév 2026 &middot; 302 part.</p>
-                <div class="text-xs text-gray-500 mb-1">Score phishing</div>
-                <div class="text-3xl font-extrabold text-score-red">56%</div>
+                <p class="text-[0.875rem] text-[#878787] mb-3">Nov 2025 – Fév 2026 &middot; 302 part.</p>
+                <div class="text-[0.875rem] text-[#878787] mb-1">Score phishing</div>
+                <div class="text-3xl font-extrabold text-[#dc2626]">56%</div>
                 <div class="mt-3 flex gap-2 text-xs">
-                    <span class="pill bg-orange-100 text-orange-700">36% clics</span>
-                    <span class="pill bg-red-100 text-red-700">25% données</span>
+                    <span class="pill bg-orange-100 text-[#ea580c]">36% clics</span>
+                    <span class="pill bg-red-100 text-[#dc2626]">25% données</span>
                 </div>
-                <div class="mt-2 text-xs text-red-600 font-semibold">↓ 5 pts</div>
+                <div class="mt-2 text-xs text-[#dc2626] font-semibold">↓ 5 pts</div>
             </div>
         </div>
 
         <!-- Big trend -->
-        <div class="bg-gray-50 rounded-2xl p-8 text-center border border-gray-200">
-            <p class="text-sm text-gray-500 uppercase font-semibold tracking-wider mb-2">Évolution score de sécurité phishing</p>
+        <div class="bg-[#F5F5F5] rounded-lg p-8 text-center border border-[#B0B1B3]">
+            <p class="text-[0.875rem] text-[#878787] uppercase font-semibold tracking-wider mb-2 font-heading">Évolution score de sécurité phishing</p>
             <div class="flex items-center justify-center gap-4 text-4xl font-extrabold">
-                <span class="text-score-green">73%</span>
-                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                <span class="text-score-yellow">59%</span>
-                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                <span class="text-score-yellow">61%</span>
-                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                <span class="text-score-red">56%</span>
+                <span class="text-[#16a34a]">73%</span>
+                <svg class="w-8 h-8 text-[#B0B1B3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                <span class="text-[#ca8a04]">59%</span>
+                <svg class="w-8 h-8 text-[#B0B1B3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                <span class="text-[#ca8a04]">61%</span>
+                <svg class="w-8 h-8 text-[#B0B1B3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                <span class="text-[#dc2626]">56%</span>
             </div>
-            <p class="text-cejef-accent font-bold mt-3 text-lg">↓ 17 points en 4 campagnes</p>
+            <p class="text-[#dc2626] font-bold mt-3 text-lg">↓ 17 points en 4 campagnes</p>
         </div>
     </div>
 </section>
 
 <!-- Participation -->
 <section id="participation" class="py-16">
-    <div class="max-w-6xl mx-auto px-6">
+    <div class="section-container">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Participation aux activités</h2>
-            <p class="text-gray-600 text-lg">Taux d'inactifs par division — évolution positive</p>
+            <h2 class="font-heading text-[1.5rem] font-semibold text-[#003865] mb-3">Participation aux activités</h2>
+            <p class="text-[#878787] text-[1rem]">Taux d'inactifs par division — évolution positive</p>
         </div>
 
-        <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm mb-8">
-            <h3 class="font-bold text-lg mb-6">Taux d'inactifs par trail</h3>
+        <div class="bg-white rounded-lg p-8 border border-[#B0B1B3] mb-8">
+            <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mb-6">Taux d'inactifs par trail</h3>
             <div class="overflow-x-auto">
                 <table class="data-table">
                     <thead>
@@ -324,40 +321,40 @@ details[open] summary::before { transform:rotate(90deg); }
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm text-gray-500 mt-4">↓ = amélioration (moins d'inactifs). De 95 inactifs (28%) au Trail 1 à 4 (1%) au Trail 4.</p>
+            <p class="text-[0.875rem] text-[#878787] mt-4">↓ = amélioration (moins d'inactifs). De 95 inactifs (28%) au Trail 1 à 4 (1%) au Trail 4.</p>
         </div>
 
         <!-- Visual bars -->
-        <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
-            <h3 class="font-bold text-lg mb-6">Évolution visuelle — Inactifs CEJEF</h3>
+        <div class="bg-white rounded-lg p-8 border border-[#B0B1B3]">
+            <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mb-6">Évolution visuelle — Inactifs CEJEF</h3>
             <div class="space-y-4">
                 <div>
                     <div class="flex items-center justify-between mb-1">
                         <span class="text-sm font-medium">Trail 1 — 95 inactifs</span>
-                        <span class="text-sm font-bold text-orange-600">28%</span>
+                        <span class="text-sm font-bold text-[#ea580c]">28%</span>
                     </div>
-                    <div class="w-full bg-gray-100 rounded-full h-6"><div class="bar-h bg-orange-500" style="width:28%"></div></div>
+                    <div class="w-full bg-[#F5F5F5] rounded h-6"><div class="bar-h bg-[#ea580c]" style="width:28%"></div></div>
                 </div>
                 <div>
                     <div class="flex items-center justify-between mb-1">
                         <span class="text-sm font-medium">Trail 2 — 34 inactifs</span>
-                        <span class="text-sm font-bold text-yellow-600">11%</span>
+                        <span class="text-sm font-bold text-[#ca8a04]">11%</span>
                     </div>
-                    <div class="w-full bg-gray-100 rounded-full h-6"><div class="bar-h bg-yellow-500" style="width:11%"></div></div>
+                    <div class="w-full bg-[#F5F5F5] rounded h-6"><div class="bar-h bg-[#ca8a04]" style="width:11%"></div></div>
                 </div>
                 <div>
                     <div class="flex items-center justify-between mb-1">
                         <span class="text-sm font-medium">Trail 3 — 17 inactifs</span>
-                        <span class="text-sm font-bold text-green-600">5%</span>
+                        <span class="text-sm font-bold text-[#16a34a]">5%</span>
                     </div>
-                    <div class="w-full bg-gray-100 rounded-full h-6"><div class="bar-h bg-green-500" style="width:5%"></div></div>
+                    <div class="w-full bg-[#F5F5F5] rounded h-6"><div class="bar-h bg-[#16a34a]" style="width:5%"></div></div>
                 </div>
                 <div>
                     <div class="flex items-center justify-between mb-1">
                         <span class="text-sm font-medium">Trail 4 — 4 inactifs</span>
-                        <span class="text-sm font-bold text-green-600">1%</span>
+                        <span class="text-sm font-bold text-[#16a34a]">1%</span>
                     </div>
-                    <div class="w-full bg-gray-100 rounded-full h-6"><div class="bar-h bg-green-500" style="width:1%"></div></div>
+                    <div class="w-full bg-[#F5F5F5] rounded h-6"><div class="bar-h bg-[#16a34a]" style="width:1%"></div></div>
                 </div>
             </div>
         </div>
@@ -366,39 +363,39 @@ details[open] summary::before { transform:rotate(90deg); }
 
 <!-- Phishing -->
 <section id="phishing" class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-6">
+    <div class="section-container">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Résultats des tests de phishing</h2>
-            <p class="text-gray-600 text-lg">4 simulations, des résultats en baisse constante</p>
+            <h2 class="font-heading text-[1.5rem] font-semibold text-[#003865] mb-3">Résultats des tests de phishing</h2>
+            <p class="text-[#878787] text-[1rem]">4 simulations, des résultats en baisse constante</p>
         </div>
 
         <!-- Phishing scenarios -->
         <div class="grid md:grid-cols-2 gap-6 mb-10">
             <div class="stat-card">
-                <span class="pill bg-blue-100 text-blue-700 mb-3">Phishing 1 — Nov 2024</span>
-                <h3 class="font-bold mt-2">Mise à jour messagerie</h3>
-                <p class="text-sm text-gray-500 mt-1">Faux email du service informatique demandant de valider un nouveau portail via un lien vers "onlinlogin.ch"</p>
+                <span class="pill bg-[#003865] text-white mb-3">Phishing 1 — Nov 2024</span>
+                <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mt-2">Mise à jour messagerie</h3>
+                <p class="text-[0.875rem] text-[#878787] mt-1">Faux email du service informatique demandant de valider un nouveau portail via un lien vers "onlinlogin.ch"</p>
             </div>
             <div class="stat-card">
-                <span class="pill bg-purple-100 text-purple-700 mb-3">Phishing 2 — Mars 2025</span>
-                <h3 class="font-bold mt-2">Espace de stockage saturé</h3>
-                <p class="text-sm text-gray-500 mt-1">Faux message d'alerte stockage avec lien vers "login.mywebaccount.ch" pour gérer l'espace</p>
+                <span class="pill bg-[#0053A1] text-white mb-3">Phishing 2 — Mars 2025</span>
+                <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mt-2">Espace de stockage saturé</h3>
+                <p class="text-[0.875rem] text-[#878787] mt-1">Faux message d'alerte stockage avec lien vers "login.mywebaccount.ch" pour gérer l'espace</p>
             </div>
             <div class="stat-card">
-                <span class="pill bg-teal-100 text-teal-700 mb-3">Phishing 3 — Mai 2025</span>
-                <h3 class="font-bold mt-2">Partage SharePoint</h3>
-                <p class="text-sm text-gray-500 mt-1">Faux partage de fichier par "Zoé Schwab" via "safeadmin.ch" imitant une notification SharePoint</p>
+                <span class="pill bg-[#003865] text-white mb-3">Phishing 3 — Mai 2025</span>
+                <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mt-2">Partage SharePoint</h3>
+                <p class="text-[0.875rem] text-[#878787] mt-1">Faux partage de fichier par "Zoé Schwab" via "safeadmin.ch" imitant une notification SharePoint</p>
             </div>
-            <div class="stat-card border-2 border-cejef-accent">
-                <span class="pill bg-red-100 text-red-700 mb-3">Phishing 4 — Fév 2026</span>
-                <h3 class="font-bold mt-2">Mise à jour annuaire</h3>
-                <p class="text-sm text-gray-500 mt-1">Faux email de "Florence Zaugg" via "adminwise.ch" demandant de vérifier ses informations dans un nouvel annuaire</p>
+            <div class="stat-card border-2 border-[#dc2626]">
+                <span class="pill bg-[#dc2626] text-white mb-3">Phishing 4 — Fév 2026</span>
+                <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mt-2">Mise à jour annuaire</h3>
+                <p class="text-[0.875rem] text-[#878787] mt-1">Faux email de "Florence Zaugg" via "adminwise.ch" demandant de vérifier ses informations dans un nouvel annuaire</p>
             </div>
         </div>
 
         <!-- Main comparison table -->
-        <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200 mb-8">
-            <h3 class="font-bold text-lg mb-6">Comparaison des 4 campagnes phishing — CEJEF</h3>
+        <div class="bg-[#F5F5F5] rounded-lg p-8 border border-[#B0B1B3] mb-8">
+            <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mb-6">Comparaison des 4 campagnes phishing — CEJEF</h3>
             <div class="overflow-x-auto">
                 <table class="data-table">
                     <thead>
@@ -412,7 +409,7 @@ details[open] summary::before { transform:rotate(90deg); }
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td class="font-semibold">Participants</td><td class="text-center">341</td><td class="text-center">322</td><td class="text-center">322</td><td class="text-center">325</td><td class="text-center text-gray-400">—</td></tr>
+                        <tr><td class="font-semibold">Participants</td><td class="text-center">341</td><td class="text-center">322</td><td class="text-center">322</td><td class="text-center">325</td><td class="text-center text-[#878787]">—</td></tr>
                         <tr><td class="font-semibold">Liens cliqués</td><td class="text-center">21%</td><td class="text-center score-low">33%</td><td class="text-center score-danger">39%</td><td class="text-center score-danger">36%</td><td class="text-center trend-down font-bold">↑ 15 pts</td></tr>
                         <tr><td class="font-semibold">Données saisies</td><td class="text-center">14%</td><td class="text-center score-low">23%</td><td class="text-center">16%</td><td class="text-center score-low">25%</td><td class="text-center trend-down font-bold">↑ 11 pts</td></tr>
                         <tr class="row-total"><td class="font-bold">Score de sécurité</td><td class="text-center score-high">73%</td><td class="text-center score-mid">59%</td><td class="text-center score-mid">61%</td><td class="text-center score-danger">56%</td><td class="text-center trend-down font-bold">↓ 17 pts</td></tr>
@@ -423,24 +420,24 @@ details[open] summary::before { transform:rotate(90deg); }
 
         <!-- Visual comparison bars -->
         <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
-                <h4 class="font-bold mb-4">Liens cliqués — évolution</h4>
+            <div class="bg-[#F5F5F5] rounded-lg p-6 border border-[#B0B1B3]">
+                <h4 class="font-heading font-semibold text-[1rem] text-[#1A171B] mb-4">Liens cliqués — évolution</h4>
                 <div class="space-y-3">
-                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 1</span><span class="font-bold">21%</span></div><div class="w-full bg-gray-200 rounded-full h-5"><div class="bar-h bg-blue-500" style="width:21%"></div></div></div>
-                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 2</span><span class="font-bold text-orange-600">33%</span></div><div class="w-full bg-gray-200 rounded-full h-5"><div class="bar-h bg-orange-500" style="width:33%"></div></div></div>
-                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 3</span><span class="font-bold text-red-600">39%</span></div><div class="w-full bg-gray-200 rounded-full h-5"><div class="bar-h bg-red-500" style="width:39%"></div></div></div>
-                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 4</span><span class="font-bold text-red-600">36%</span></div><div class="w-full bg-gray-200 rounded-full h-5"><div class="bar-h bg-red-600" style="width:36%"></div></div></div>
+                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 1</span><span class="font-bold">21%</span></div><div class="w-full bg-white rounded h-5"><div class="bar-h bg-[#003865]" style="width:21%"></div></div></div>
+                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 2</span><span class="font-bold text-[#ea580c]">33%</span></div><div class="w-full bg-white rounded h-5"><div class="bar-h bg-[#ea580c]" style="width:33%"></div></div></div>
+                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 3</span><span class="font-bold text-[#dc2626]">39%</span></div><div class="w-full bg-white rounded h-5"><div class="bar-h bg-[#dc2626]" style="width:39%"></div></div></div>
+                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 4</span><span class="font-bold text-[#dc2626]">36%</span></div><div class="w-full bg-white rounded h-5"><div class="bar-h bg-[#dc2626]" style="width:36%"></div></div></div>
                 </div>
             </div>
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
-                <h4 class="font-bold mb-4">Données saisies — évolution</h4>
+            <div class="bg-[#F5F5F5] rounded-lg p-6 border border-[#B0B1B3]">
+                <h4 class="font-heading font-semibold text-[1rem] text-[#1A171B] mb-4">Données saisies — évolution</h4>
                 <div class="space-y-3">
-                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 1</span><span class="font-bold">14%</span></div><div class="w-full bg-gray-200 rounded-full h-5"><div class="bar-h bg-blue-500" style="width:28%"></div></div></div>
-                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 2</span><span class="font-bold text-orange-600">23%</span></div><div class="w-full bg-gray-200 rounded-full h-5"><div class="bar-h bg-orange-500" style="width:46%"></div></div></div>
-                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 3</span><span class="font-bold">16%</span></div><div class="w-full bg-gray-200 rounded-full h-5"><div class="bar-h bg-yellow-500" style="width:32%"></div></div></div>
-                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 4</span><span class="font-bold text-red-600">25%</span></div><div class="w-full bg-gray-200 rounded-full h-5"><div class="bar-h bg-red-600" style="width:50%"></div></div></div>
+                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 1</span><span class="font-bold">14%</span></div><div class="w-full bg-white rounded h-5"><div class="bar-h bg-[#003865]" style="width:28%"></div></div></div>
+                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 2</span><span class="font-bold text-[#ea580c]">23%</span></div><div class="w-full bg-white rounded h-5"><div class="bar-h bg-[#ea580c]" style="width:46%"></div></div></div>
+                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 3</span><span class="font-bold">16%</span></div><div class="w-full bg-white rounded h-5"><div class="bar-h bg-[#ca8a04]" style="width:32%"></div></div></div>
+                    <div><div class="flex justify-between text-sm mb-1"><span>Phishing 4</span><span class="font-bold text-[#dc2626]">25%</span></div><div class="w-full bg-white rounded h-5"><div class="bar-h bg-[#dc2626]" style="width:50%"></div></div></div>
                 </div>
-                <p class="text-xs text-gray-400 mt-2">Échelle visuelle doublée pour lisibilité</p>
+                <p class="text-[0.75rem] text-[#878787] mt-2">Échelle visuelle doublée pour lisibilité</p>
             </div>
         </div>
     </div>
@@ -448,13 +445,13 @@ details[open] summary::before { transform:rotate(90deg); }
 
 <!-- Divisions -->
 <section id="divisions" class="py-16">
-    <div class="max-w-6xl mx-auto px-6">
+    <div class="section-container">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Scores phishing par division</h2>
-            <p class="text-gray-600 text-lg">Évolution du score de sécurité sur les 4 campagnes</p>
+            <h2 class="font-heading text-[1.5rem] font-semibold text-[#003865] mb-3">Scores phishing par division</h2>
+            <p class="text-[#878787] text-[1rem]">Évolution du score de sécurité sur les 4 campagnes</p>
         </div>
 
-        <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm mb-8">
+        <div class="bg-white rounded-lg p-8 border border-[#B0B1B3] mb-8">
             <div class="overflow-x-auto">
                 <table class="data-table">
                     <thead>
@@ -480,39 +477,54 @@ details[open] summary::before { transform:rotate(90deg); }
             </div>
         </div>
 
-        <!-- Moyennes par division -->
+        <!-- Moyennes par division avec icônes SVG -->
         <div class="grid md:grid-cols-5 gap-4 mb-8">
             <div class="stat-card text-center">
-                <div class="font-extrabold text-lg">DIVART</div>
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <img src="img/icon-divart.svg" alt="DIVART" class="h-6 w-6">
+                    <div class="font-heading font-bold text-[1rem]" style="color:#003865">DIVART</div>
+                </div>
                 <div class="text-2xl font-extrabold mt-1">61%</div>
-                <p class="text-xs text-gray-500 mt-1">Δ -12 pts</p>
+                <p class="text-[0.875rem] text-[#878787] mt-1">Δ -12 pts</p>
             </div>
             <div class="stat-card text-center">
-                <div class="font-extrabold text-lg">DIVCOM</div>
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <img src="img/icon-divcom.svg" alt="DIVCOM" class="h-6 w-6">
+                    <div class="font-heading font-bold text-[1rem]" style="color:#0053A1">DIVCOM</div>
+                </div>
                 <div class="text-2xl font-extrabold mt-1">58%</div>
-                <p class="text-xs text-gray-500 mt-1">Δ -34 pts</p>
+                <p class="text-[0.875rem] text-[#878787] mt-1">Δ -34 pts</p>
             </div>
             <div class="stat-card text-center">
-                <div class="font-extrabold text-lg">DIVLYC</div>
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <img src="img/icon-divlyc.svg" alt="DIVLYC" class="h-6 w-6">
+                    <div class="font-heading font-bold text-[1rem]" style="color:#F28C00">DIVLYC</div>
+                </div>
                 <div class="text-2xl font-extrabold mt-1">64%</div>
-                <p class="text-xs text-gray-500 mt-1">Δ -14 pts</p>
+                <p class="text-[0.875rem] text-[#878787] mt-1">Δ -14 pts</p>
             </div>
             <div class="stat-card text-center">
-                <div class="font-extrabold text-lg">DIVSSA</div>
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <img src="img/icon-divssa.svg" alt="DIVSSA" class="h-6 w-6">
+                    <div class="font-heading font-bold text-[1rem]" style="color:#CAD400">DIVSSA</div>
+                </div>
                 <div class="text-2xl font-extrabold mt-1">61%</div>
-                <p class="text-xs text-gray-500 mt-1">Δ -18 pts</p>
+                <p class="text-[0.875rem] text-[#878787] mt-1">Δ -18 pts</p>
             </div>
             <div class="stat-card text-center">
-                <div class="font-extrabold text-lg">DIVTEC</div>
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <img src="img/icon-divtec.svg" alt="DIVTEC" class="h-6 w-6">
+                    <div class="font-heading font-bold text-[1rem]" style="color:#DF006E">DIVTEC</div>
+                </div>
                 <div class="text-2xl font-extrabold mt-1">67%</div>
-                <p class="text-xs text-gray-500 mt-1">Δ -11 pts</p>
+                <p class="text-[0.875rem] text-[#878787] mt-1">Δ -11 pts</p>
             </div>
         </div>
 
         <!-- Liens cliqués par division -->
         <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
-                <h3 class="font-bold text-lg mb-6">Liens cliqués par division</h3>
+            <div class="bg-white rounded-lg p-8 border border-[#B0B1B3]">
+                <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mb-6">Liens cliqués par division</h3>
                 <div class="overflow-x-auto">
                     <table class="data-table">
                         <thead><tr><th>Division</th><th class="text-center">P1</th><th class="text-center">P2</th><th class="text-center">P3</th><th class="text-center">P4</th></tr></thead>
@@ -527,8 +539,8 @@ details[open] summary::before { transform:rotate(90deg); }
                     </table>
                 </div>
             </div>
-            <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
-                <h3 class="font-bold text-lg mb-6">Données saisies par division</h3>
+            <div class="bg-white rounded-lg p-8 border border-[#B0B1B3]">
+                <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mb-6">Données saisies par division</h3>
                 <div class="overflow-x-auto">
                     <table class="data-table">
                         <thead><tr><th>Division</th><th class="text-center">P1</th><th class="text-center">P2</th><th class="text-center">P3</th><th class="text-center">P4</th></tr></thead>
@@ -549,20 +561,20 @@ details[open] summary::before { transform:rotate(90deg); }
 
 <!-- Trails detail -->
 <section id="trails" class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-6">
+    <div class="section-container">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Détail par trail</h2>
-            <p class="text-gray-600 text-lg">Scores des activités de formation (vidéos, quiz) et niveaux de risque</p>
+            <h2 class="font-heading text-[1.5rem] font-semibold text-[#003865] mb-3">Détail par trail</h2>
+            <p class="text-[#878787] text-[1rem]">Scores des activités de formation (vidéos, quiz) et niveaux de risque</p>
         </div>
 
         <!-- Trail 1 detail -->
-        <details class="bg-gray-50 rounded-2xl border border-gray-200 mb-4">
-            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-2xl transition">
+        <details class="bg-[#F5F5F5] rounded-lg border border-[#B0B1B3] mb-4">
+            <summary class="p-6 font-heading font-semibold text-[1.25rem] text-[#1A171B] hover:bg-white rounded-lg transition">
                 Trail 1 — Détecter le phishing
-                <span class="text-sm font-normal text-gray-500 ml-2">Sept–Nov 2024 &middot; 341 participants</span>
+                <span class="text-[0.875rem] font-normal text-[#878787] ml-2">Sept–Nov 2024 &middot; 341 participants</span>
             </summary>
             <div class="px-6 pb-6">
-                <p class="text-sm text-gray-600 mb-4">Contenu : 1 vidéo (C1 - L'éditeur masqué), 1 quiz (C2 - Détecter le phishing), 1 simulation phishing (C3 - Mise à jour messagerie)</p>
+                <p class="text-[0.875rem] text-[#878787] mb-4">Contenu : 1 vidéo (C1 - L'éditeur masqué), 1 quiz (C2 - Détecter le phishing), 1 simulation phishing (C3 - Mise à jour messagerie)</p>
                 <div class="overflow-x-auto">
                     <table class="data-table">
                         <thead><tr><th>Division</th><th class="text-center">Part.</th><th class="text-center">C1 Vidéo</th><th class="text-center">C2 Quiz</th><th class="text-center">C3 Phishing</th></tr></thead>
@@ -580,13 +592,13 @@ details[open] summary::before { transform:rotate(90deg); }
         </details>
 
         <!-- Trail 2 detail -->
-        <details class="bg-gray-50 rounded-2xl border border-gray-200 mb-4">
-            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-2xl transition">
+        <details class="bg-[#F5F5F5] rounded-lg border border-[#B0B1B3] mb-4">
+            <summary class="p-6 font-heading font-semibold text-[1.25rem] text-[#1A171B] hover:bg-white rounded-lg transition">
                 Trail 2 — Lire les liens internet
-                <span class="text-sm font-normal text-gray-500 ml-2">Déc 2024–Mars 2025 &middot; 322 participants</span>
+                <span class="text-[0.875rem] font-normal text-[#878787] ml-2">Déc 2024–Mars 2025 &middot; 322 participants</span>
             </summary>
             <div class="px-6 pb-6">
-                <p class="text-sm text-gray-600 mb-4">Contenu : 1 vidéo (C1 - Le lien mystérieux), 2 quiz (C2 - Identité site web, C3 - Lire les liens), 1 phishing (C4 - Stockage saturé). Score S = score de sécurité cumulé.</p>
+                <p class="text-[0.875rem] text-[#878787] mb-4">Contenu : 1 vidéo (C1 - Le lien mystérieux), 2 quiz (C2 - Identité site web, C3 - Lire les liens), 1 phishing (C4 - Stockage saturé). Score S = score de sécurité cumulé.</p>
                 <div class="overflow-x-auto">
                     <table class="data-table">
                         <thead><tr><th>Division</th><th class="text-center">Part.</th><th class="text-center">C1</th><th class="text-center">C2</th><th class="text-center">C3</th><th class="text-center">C4</th><th class="text-center">Score S</th></tr></thead>
@@ -595,7 +607,7 @@ details[open] summary::before { transform:rotate(90deg); }
                             <tr><td>DIVCOM</td><td class="text-center">58</td><td class="text-center">58%</td><td class="text-center">77%</td><td class="text-center">71%</td><td class="text-center">66%</td><td class="text-center">68%</td></tr>
                             <tr><td>DIVLYC</td><td class="text-center">68</td><td class="text-center">70%</td><td class="text-center">63%</td><td class="text-center">62%</td><td class="text-center">51%</td><td class="text-center">62%</td></tr>
                             <tr><td>DIVSSA</td><td class="text-center">63</td><td class="text-center">72%</td><td class="text-center">67%</td><td class="text-center">65%</td><td class="text-center">69%</td><td class="text-center">68%</td></tr>
-                            <tr><td>DIVTEC</td><td class="text-center">79</td><td class="text-center">92%</td><td class="text-center">86%</td><td class="text-center">88%</td><td class="text-center">61%</td><td class="text-center ">82%</td></tr>
+                            <tr><td>DIVTEC</td><td class="text-center">79</td><td class="text-center">92%</td><td class="text-center">86%</td><td class="text-center">88%</td><td class="text-center">61%</td><td class="text-center">82%</td></tr>
                             <tr class="row-total"><td>CEJEF</td><td class="text-center">322</td><td class="text-center font-bold">76%</td><td class="text-center font-bold">70%</td><td class="text-center font-bold">68%</td><td class="text-center font-bold">59%</td><td class="text-center font-bold">68%</td></tr>
                         </tbody>
                     </table>
@@ -604,14 +616,14 @@ details[open] summary::before { transform:rotate(90deg); }
         </details>
 
         <!-- Trail 3 detail -->
-        <details class="bg-gray-50 rounded-2xl border border-gray-200 mb-4">
-            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-2xl transition">
+        <details class="bg-[#F5F5F5] rounded-lg border border-[#B0B1B3] mb-4">
+            <summary class="p-6 font-heading font-semibold text-[1.25rem] text-[#1A171B] hover:bg-white rounded-lg transition">
                 Trail 3 — SharePoint / Fichiers
-                <span class="text-sm font-normal text-gray-500 ml-2">Mars–Juin 2025 &middot; 322 participants</span>
+                <span class="text-[0.875rem] font-normal text-[#878787] ml-2">Mars–Juin 2025 &middot; 322 participants</span>
             </summary>
             <div class="px-6 pb-6">
-                <p class="text-sm text-gray-600 mb-4">Bilan fin de campagne 2024-2025. Indicateurs : Implication (interaction), Connaissances (quiz), Sensibilisation (détection phishing).</p>
-                <h4 class="font-bold mt-4 mb-3">Indicateurs de synthèse</h4>
+                <p class="text-[0.875rem] text-[#878787] mb-4">Bilan fin de campagne 2024-2025. Indicateurs : Implication (interaction), Connaissances (quiz), Sensibilisation (détection phishing).</p>
+                <h4 class="font-heading font-semibold text-[1rem] text-[#1A171B] mt-4 mb-3">Indicateurs de synthèse</h4>
                 <div class="overflow-x-auto">
                     <table class="data-table">
                         <thead><tr><th>Division</th><th class="text-center">Part.</th><th class="text-center">Implication</th><th class="text-center">Connaissances</th><th class="text-center">Sensibilisation</th><th class="text-center">Score</th></tr></thead>
@@ -620,31 +632,31 @@ details[open] summary::before { transform:rotate(90deg); }
                             <tr><td>DIVCOM</td><td class="text-center">57</td><td class="text-center">76%</td><td class="text-center">70%</td><td class="text-center">57%</td><td class="text-center">73</td></tr>
                             <tr><td>DIVLYC</td><td class="text-center">68</td><td class="text-center">81%</td><td class="text-center">72%</td><td class="text-center">64%</td><td class="text-center">78</td></tr>
                             <tr><td>DIVSSA</td><td class="text-center">62</td><td class="text-center">83%</td><td class="text-center">72%</td><td class="text-center">58%</td><td class="text-center">75</td></tr>
-                            <tr><td>DIVTEC</td><td class="text-center">80</td><td class="text-center ">93%</td><td class="text-center ">86%</td><td class="text-center ">69%</td><td class="text-center ">86</td></tr>
+                            <tr><td>DIVTEC</td><td class="text-center">80</td><td class="text-center">93%</td><td class="text-center">86%</td><td class="text-center">69%</td><td class="text-center">86</td></tr>
                             <tr class="row-total"><td>CEJEF</td><td class="text-center">321</td><td class="text-center font-bold">83%</td><td class="text-center font-bold">74%</td><td class="text-center font-bold">62%</td><td class="text-center font-bold">78</td></tr>
                         </tbody>
                     </table>
                 </div>
-                <h4 class="font-bold mt-6 mb-3">Niveaux de risque (fin Trail 3)</h4>
+                <h4 class="font-heading font-semibold text-[1rem] text-[#1A171B] mt-6 mb-3">Niveaux de risque (fin Trail 3)</h4>
                 <div class="grid grid-cols-4 gap-4">
-                    <div class="text-center p-4 bg-green-50 rounded-xl"><div class="text-2xl font-extrabold text-green-700">74%</div><div class="text-xs text-green-600 font-semibold">Avancé</div><div class="text-xs text-gray-500">237 pers.</div></div>
-                    <div class="text-center p-4 bg-yellow-50 rounded-xl"><div class="text-2xl font-extrabold text-yellow-700">20%</div><div class="text-xs text-yellow-600 font-semibold">Intermédiaire</div><div class="text-xs text-gray-500">64 pers.</div></div>
-                    <div class="text-center p-4 bg-red-50 rounded-xl"><div class="text-2xl font-extrabold text-red-700">4%</div><div class="text-xs text-red-600 font-semibold">Haut risque</div><div class="text-xs text-gray-500">14 pers.</div></div>
-                    <div class="text-center p-4 bg-gray-100 rounded-xl"><div class="text-2xl font-extrabold text-gray-500">2%</div><div class="text-xs text-gray-500 font-semibold">Inactif</div><div class="text-xs text-gray-400">6 pers.</div></div>
+                    <div class="text-center p-4 bg-white rounded-lg border border-[#B0B1B3]"><div class="text-2xl font-extrabold text-[#16a34a]">74%</div><div class="text-xs text-[#16a34a] font-semibold">Avancé</div><div class="text-[0.875rem] text-[#878787]">237 pers.</div></div>
+                    <div class="text-center p-4 bg-white rounded-lg border border-[#B0B1B3]"><div class="text-2xl font-extrabold text-[#ca8a04]">20%</div><div class="text-xs text-[#ca8a04] font-semibold">Intermédiaire</div><div class="text-[0.875rem] text-[#878787]">64 pers.</div></div>
+                    <div class="text-center p-4 bg-white rounded-lg border border-[#B0B1B3]"><div class="text-2xl font-extrabold text-[#dc2626]">4%</div><div class="text-xs text-[#dc2626] font-semibold">Haut risque</div><div class="text-[0.875rem] text-[#878787]">14 pers.</div></div>
+                    <div class="text-center p-4 bg-white rounded-lg border border-[#B0B1B3]"><div class="text-2xl font-extrabold text-[#878787]">2%</div><div class="text-xs text-[#878787] font-semibold">Inactif</div><div class="text-[0.875rem] text-[#878787]">6 pers.</div></div>
                 </div>
             </div>
         </details>
 
         <!-- Trail 4 detail -->
-        <details open class="bg-gray-50 rounded-2xl border-2 border-cejef-accent mb-4">
-            <summary class="p-6 font-bold text-lg hover:bg-gray-100 rounded-2xl transition">
+        <details open class="bg-[#F5F5F5] rounded-lg border-2 border-[#dc2626] mb-4">
+            <summary class="p-6 font-heading font-semibold text-[1.25rem] text-[#1A171B] hover:bg-white rounded-lg transition">
                 Trail 4 — Intelligence artificielle
-                <span class="text-sm font-normal text-gray-500 ml-2">Nov 2025–Fév 2026 &middot; 302 participants</span>
-                <span class="pill bg-red-100 text-red-700 ml-2">Dernier</span>
+                <span class="text-[0.875rem] font-normal text-[#878787] ml-2">Nov 2025–Fév 2026 &middot; 302 participants</span>
+                <span class="pill bg-[#dc2626] text-white ml-2">Dernier</span>
             </summary>
             <div class="px-6 pb-6">
-                <p class="text-sm text-gray-600 mb-4">Contenu : 1 vidéo (C1 - IA au travail), 2 quiz (C2 - Risques IA, C3 - Identité site web 2), 1 phishing (C4 - Annuaire collaborateurs).</p>
-                <h4 class="font-bold mt-4 mb-3">Scores par division</h4>
+                <p class="text-[0.875rem] text-[#878787] mb-4">Contenu : 1 vidéo (C1 - IA au travail), 2 quiz (C2 - Risques IA, C3 - Identité site web 2), 1 phishing (C4 - Annuaire collaborateurs).</p>
+                <h4 class="font-heading font-semibold text-[1rem] text-[#1A171B] mt-4 mb-3">Scores par division</h4>
                 <div class="overflow-x-auto">
                     <table class="data-table">
                         <thead><tr><th>Division</th><th class="text-center">Part.</th><th class="text-center">C1 Vidéo</th><th class="text-center">C2 Quiz</th><th class="text-center">C3 Quiz</th><th class="text-center">C4 Phishing</th><th class="text-center">Score global</th></tr></thead>
@@ -659,27 +671,27 @@ details[open] summary::before { transform:rotate(90deg); }
                     </table>
                 </div>
 
-                <h4 class="font-bold mt-6 mb-3">Détail phishing « Annuaire collaborateurs » (3 fév 2026)</h4>
+                <h4 class="font-heading font-semibold text-[1rem] text-[#1A171B] mt-6 mb-3">Détail phishing « Annuaire collaborateurs » (3 fév 2026)</h4>
                 <div class="overflow-x-auto">
                     <table class="data-table">
                         <thead><tr><th>Division</th><th class="text-center">Part.</th><th class="text-center">Cliqués</th><th class="text-center">Données</th><th class="text-center">Score</th></tr></thead>
                         <tbody>
-                            <tr><td>DIVART</td><td class="text-center">57</td><td class="text-center ">40%</td><td class="text-center">23%</td><td class="text-center">55%</td></tr>
-                            <tr><td>DIVCOM</td><td class="text-center">62</td><td class="text-center ">44%</td><td class="text-center">34%</td><td class="text-center">44%</td></tr>
+                            <tr><td>DIVART</td><td class="text-center">57</td><td class="text-center">40%</td><td class="text-center">23%</td><td class="text-center">55%</td></tr>
+                            <tr><td>DIVCOM</td><td class="text-center">62</td><td class="text-center">44%</td><td class="text-center">34%</td><td class="text-center">44%</td></tr>
                             <tr><td>DIVLYC</td><td class="text-center">65</td><td class="text-center">28%</td><td class="text-center">23%</td><td class="text-center">61%</td></tr>
-                            <tr><td>DIVSSA</td><td class="text-center">62</td><td class="text-center ">40%</td><td class="text-center">24%</td><td class="text-center">53%</td></tr>
+                            <tr><td>DIVSSA</td><td class="text-center">62</td><td class="text-center">40%</td><td class="text-center">24%</td><td class="text-center">53%</td></tr>
                             <tr><td>DIVTEC</td><td class="text-center">79</td><td class="text-center">32%</td><td class="text-center">20%</td><td class="text-center">61%</td></tr>
                             <tr class="row-total"><td>CEJEF</td><td class="text-center">325</td><td class="text-center font-bold">36%</td><td class="text-center font-bold">25%</td><td class="text-center font-bold">56%</td></tr>
                         </tbody>
                     </table>
                 </div>
 
-                <h4 class="font-bold mt-6 mb-3">Niveaux de risque (fin Trail 4)</h4>
+                <h4 class="font-heading font-semibold text-[1rem] text-[#1A171B] mt-6 mb-3">Niveaux de risque (fin Trail 4)</h4>
                 <div class="grid grid-cols-4 gap-4">
-                    <div class="text-center p-4 bg-green-50 rounded-xl"><div class="text-2xl font-extrabold text-green-700">76%</div><div class="text-xs text-green-600 font-semibold">Avancé</div><div class="text-xs text-gray-500">230 pers.</div></div>
-                    <div class="text-center p-4 bg-yellow-50 rounded-xl"><div class="text-2xl font-extrabold text-yellow-700">20%</div><div class="text-xs text-yellow-600 font-semibold">Intermédiaire</div><div class="text-xs text-gray-500">59 pers.</div></div>
-                    <div class="text-center p-4 bg-red-50 rounded-xl"><div class="text-2xl font-extrabold text-red-700">3%</div><div class="text-xs text-red-600 font-semibold">Haut risque</div><div class="text-xs text-gray-500">9 pers.</div></div>
-                    <div class="text-center p-4 bg-gray-100 rounded-xl"><div class="text-2xl font-extrabold text-gray-500">1%</div><div class="text-xs text-gray-500 font-semibold">Inactif</div><div class="text-xs text-gray-400">4 pers.</div></div>
+                    <div class="text-center p-4 bg-white rounded-lg border border-[#B0B1B3]"><div class="text-2xl font-extrabold text-[#16a34a]">76%</div><div class="text-xs text-[#16a34a] font-semibold">Avancé</div><div class="text-[0.875rem] text-[#878787]">230 pers.</div></div>
+                    <div class="text-center p-4 bg-white rounded-lg border border-[#B0B1B3]"><div class="text-2xl font-extrabold text-[#ca8a04]">20%</div><div class="text-xs text-[#ca8a04] font-semibold">Intermédiaire</div><div class="text-[0.875rem] text-[#878787]">59 pers.</div></div>
+                    <div class="text-center p-4 bg-white rounded-lg border border-[#B0B1B3]"><div class="text-2xl font-extrabold text-[#dc2626]">3%</div><div class="text-xs text-[#dc2626] font-semibold">Haut risque</div><div class="text-[0.875rem] text-[#878787]">9 pers.</div></div>
+                    <div class="text-center p-4 bg-white rounded-lg border border-[#B0B1B3]"><div class="text-2xl font-extrabold text-[#878787]">1%</div><div class="text-xs text-[#878787] font-semibold">Inactif</div><div class="text-[0.875rem] text-[#878787]">4 pers.</div></div>
                 </div>
             </div>
         </details>
@@ -688,64 +700,64 @@ details[open] summary::before { transform:rotate(90deg); }
 
 <!-- Constats -->
 <section id="constats" class="py-16">
-    <div class="max-w-6xl mx-auto px-6">
+    <div class="section-container">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Constats et recommandations</h2>
-            <p class="text-gray-600 text-lg">Analyse des tendances après 4 campagnes</p>
+            <h2 class="font-heading text-[1.5rem] font-semibold text-[#003865] mb-3">Constats et recommandations</h2>
+            <p class="text-[#878787] text-[1rem]">Analyse des tendances après 4 campagnes</p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-6 mb-8">
-            <div class="stat-card border-l-4 border-red-500">
-                <h3 class="font-bold text-lg mb-2 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+            <div class="stat-card border-l-4 border-[#dc2626]">
+                <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#dc2626]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
                     Paradoxe formation vs phishing
                 </h3>
-                <p class="text-sm text-gray-600">La participation aux activités s'améliore (28% → 1% d'inactifs) mais les résultats phishing se dégradent (73% → 56%). <strong>Les collaborateurs font les quiz mais ne transfèrent pas les connaissances en situation réelle.</strong></p>
+                <p class="text-[0.875rem] text-[#878787]">La participation aux activités s'améliore (28% → 1% d'inactifs) mais les résultats phishing se dégradent (73% → 56%). <strong class="text-[#1A171B]">Les collaborateurs font les quiz mais ne transfèrent pas les connaissances en situation réelle.</strong></p>
             </div>
 
-            <div class="stat-card border-l-4 border-orange-500">
-                <h3 class="font-bold text-lg mb-2 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+            <div class="stat-card border-l-4 border-[#ea580c]">
+                <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#ea580c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
                     Écarts entre divisions
                 </h3>
-                <p class="text-sm text-gray-600">L'écart entre les moyennes par division va de <strong>58% à 67%</strong>. Toutes les divisions enregistrent une baisse sur les 4 campagnes, avec des variations allant de <strong>-11 à -34 points</strong>.</p>
+                <p class="text-[0.875rem] text-[#878787]">L'écart entre les moyennes par division va de <strong class="text-[#1A171B]">58% à 67%</strong>. Toutes les divisions enregistrent une baisse sur les 4 campagnes, avec des variations allant de <strong class="text-[#1A171B]">-11 à -34 points</strong>.</p>
             </div>
 
-            <div class="stat-card border-l-4 border-orange-500">
-                <h3 class="font-bold text-lg mb-2 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+            <div class="stat-card border-l-4 border-[#ea580c]">
+                <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#ea580c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
                     Taux de conversion élevé
                 </h3>
-                <p class="text-sm text-gray-600"><strong>68% de ceux qui cliquent vont jusqu'à saisir leurs identifiants</strong> (phishing 4). Le problème critique est le clic initial — une fois le lien ouvert, les collaborateurs ne font plus de vérification.</p>
+                <p class="text-[0.875rem] text-[#878787]"><strong class="text-[#1A171B]">68% de ceux qui cliquent vont jusqu'à saisir leurs identifiants</strong> (phishing 4). Le problème critique est le clic initial — une fois le lien ouvert, les collaborateurs ne font plus de vérification.</p>
             </div>
 
-            <div class="stat-card border-l-4 border-orange-500">
-                <h3 class="font-bold text-lg mb-2 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div class="stat-card border-l-4 border-[#ea580c]">
+                <h3 class="font-heading font-semibold text-[1.25rem] text-[#1A171B] mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#ea580c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     Scénarios de plus en plus efficaces
                 </h3>
-                <p class="text-sm text-gray-600">Le phishing 1 (messagerie générique) trompait moins que les phishing 3-4 (SharePoint, annuaire) qui <strong>imitent des outils internes familiers</strong>. Les attaquants aussi s'améliorent.</p>
+                <p class="text-[0.875rem] text-[#878787]">Le phishing 1 (messagerie générique) trompait moins que les phishing 3-4 (SharePoint, annuaire) qui <strong class="text-[#1A171B]">imitent des outils internes familiers</strong>. Les attaquants aussi s'améliorent.</p>
             </div>
         </div>
 
         <!-- Recommandations Navixia -->
-        <div class="bg-cejef-primary text-white rounded-2xl p-8">
-            <h3 class="font-bold text-xl mb-4">Recommandations Navixia</h3>
-            <ul class="space-y-3 text-sm">
+        <div class="bg-[#003865] text-white rounded-lg p-8">
+            <h3 class="font-heading font-bold text-[1.25rem] mb-4">Recommandations Navixia</h3>
+            <ul class="space-y-3 text-[0.875rem]">
                 <li class="flex items-start gap-3">
-                    <svg class="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+                    <svg class="w-5 h-5 text-[#CAD400] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
                     <span>Mettre en place des <strong>bandeaux d'avertissement</strong> sur les emails provenant de l'extérieur</span>
                 </li>
                 <li class="flex items-start gap-3">
-                    <svg class="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+                    <svg class="w-5 h-5 text-[#CAD400] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
                     <span>Rappeler systématiquement la <strong>vérification de l'identité de l'expéditeur</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
-                    <svg class="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+                    <svg class="w-5 h-5 text-[#CAD400] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
                     <span>Accompagnement ciblé des <strong>personnes à haut risque</strong> (3%, 9 personnes)</span>
                 </li>
                 <li class="flex items-start gap-3">
-                    <svg class="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+                    <svg class="w-5 h-5 text-[#CAD400] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
                     <span>Accompagnement ciblé des <strong>divisions présentant les écarts les plus marqués</strong> entre formation et résultats phishing</span>
                 </li>
             </ul>
@@ -756,15 +768,15 @@ details[open] summary::before { transform:rotate(90deg); }
 </main>
 
 <!-- Footer -->
-<footer class="bg-cejef-primary text-white py-8 text-center">
-    <div class="max-w-6xl mx-auto px-6">
-        <p class="text-sm opacity-80">CEJEF — Centre numérique &middot; Campagne DiagnoPhish (Navixia SA)</p>
-        <p class="text-xs opacity-50 mt-2">Données extraites des rapports officiels Navixia — Trails 1 à 4 (sept 2024 – fév 2026)</p>
+<footer class="bg-[#003865] text-white py-8 text-center">
+    <div class="section-container">
+        <p class="text-[0.875rem] opacity-80">CEJEF — Centre numérique &middot; Campagne DiagnoPhish (Navixia SA)</p>
+        <p class="text-[0.75rem] opacity-50 mt-2">Données extraites des rapports officiels Navixia — Trails 1 à 4 (sept 2024 – fév 2026)</p>
     </div>
 </footer>
 
 <!-- Back to top -->
-<button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-cejef-primary text-white rounded-full shadow-lg flex items-center justify-center opacity-0 pointer-events-none transition-opacity z-50 hover:bg-opacity-90" aria-label="Retour en haut">
+<button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-[#003865] text-white rounded-lg flex items-center justify-center opacity-0 pointer-events-none transition-opacity z-50" aria-label="Retour en haut">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
 </button>
 

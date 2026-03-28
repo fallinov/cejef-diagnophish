@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Charte graphique officielle du CEJEF — Palette, typographie, logos et règles d'utilisation.">
+<title>Charte graphique — CEJEF</title>
+<link rel="icon" type="image/svg+xml" href="img/icon-cejef.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+<script src="libs/tailwind.js"></script>
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                cejef: { navy: '#003865', blue: '#0053A1', orange: '#F28C00', lime: '#CAD400', pink: '#DF006E' },
+                neutral: { text: '#1A171B', secondary: '#878787', border: '#B0B1B3' }
+            },
+            fontFamily: {
+                heading: ['Montserrat', 'Segoe UI', 'sans-serif'],
+                body: ['Inter', 'Segoe UI', 'sans-serif']
+            }
+        }
+    }
+}
+</script>
+<style>
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600 700;
+    font-display: swap;
+    src: url('fonts/montserrat-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url('fonts/inter-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', 'Segoe UI', sans-serif; color: #1A171B; line-height: 1.5; }
+h1, h2, h3, h4 { font-family: 'Montserrat', 'Segoe UI', sans-serif; line-height: 1.2; }
+
+/* Sidebar active state */
+.nav-link { transition: color 0.2s, border-color 0.2s; }
+.nav-link.active { color: #003865; font-weight: 600; border-left-color: #003865; }
+
+/* Swatch click feedback */
+.swatch { cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+.swatch:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.swatch:active { transform: scale(0.97); }
+
+/* Toast notification */
+.toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100%);
+    opacity: 0; transition: all 0.3s ease; z-index: 50;
+    background: #1A171B; color: #fff; padding: 0.75rem 1.5rem; border-radius: 8px;
+    font-size: 0.875rem; pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* Code block */
+.code-block { background: #1A171B; color: #e5e7eb; border-radius: 8px; overflow-x: auto; }
+
+/* Table */
+.charte-table th { background: #F5F5F5; font-family: 'Montserrat', sans-serif; font-weight: 600; }
+.charte-table td, .charte-table th { padding: 0.75rem 1rem; border-bottom: 1px solid #B0B1B3; }
+.charte-table tr:last-child td { border-bottom: none; }
+
+/* Mobile sidebar */
+@media (max-width: 1023px) {
+    .sidebar { display: none; }
+}
+</style>
+</head>
+<body class="bg-[#F5F5F5] min-h-screen">
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- Header -->
+<header class="bg-white border-b border-neutral-border sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <a href="#top" class="flex items-center gap-3">
+            <img src="img/logo-cejef-officiel.svg" alt="Logo CEJEF" class="h-10">
+        </a>
+        <div class="flex items-center gap-3">
+            <span class="text-xs font-body text-neutral-secondary bg-[#F5F5F5] px-3 py-1 rounded-full border border-neutral-border">v1.0 — Mars 2026</span>
+            <!-- Mobile menu toggle -->
+            <button id="menu-toggle" class="lg:hidden p-2 rounded-lg border border-neutral-border" aria-label="Menu">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-8 mt-8" id="top">
+
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar hidden lg:block w-56 shrink-0">
+        <div class="sticky top-24">
+            <p class="text-xs font-heading font-semibold text-neutral-secondary uppercase tracking-wider mb-4">Navigation</p>
+            <ul class="space-y-1">
+                <li><a href="#palette" class="nav-link block text-sm py-1.5 pl-3 border-l-2 border-transparent text-neutral-secondary hover:text-neutral-text">Palette des divisions</a></li>
+                <li><a href="#neutres" class="nav-link block text-sm py-1.5 pl-3 border-l-2 border-transparent text-neutral-secondary hover:text-neutral-text">Couleurs neutres</a></li>
+                <li><a href="#variables" class="nav-link block text-sm py-1.5 pl-3 border-l-2 border-transparent text-neutral-secondary hover:text-neutral-text">Variables CSS</a></li>
+                <li><a href="#accessibilite" class="nav-link block text-sm py-1.5 pl-3 border-l-2 border-transparent text-neutral-secondary hover:text-neutral-text">Accessibilité</a></li>
+                <li><a href="#typographie" class="nav-link block text-sm py-1.5 pl-3 border-l-2 border-transparent text-neutral-secondary hover:text-neutral-text">Typographie</a></li>
+                <li><a href="#logos" class="nav-link block text-sm py-1.5 pl-3 border-l-2 border-transparent text-neutral-secondary hover:text-neutral-text">Logos</a></li>
+                <li><a href="#regles" class="nav-link block text-sm py-1.5 pl-3 border-l-2 border-transparent text-neutral-secondary hover:text-neutral-text">Règles d'utilisation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile sidebar overlay -->
+    <div id="mobile-nav" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/30" id="mobile-nav-backdrop"></div>
+        <div class="absolute left-0 top-0 bottom-0 w-64 bg-white p-6 shadow-lg">
+            <p class="text-xs font-heading font-semibold text-neutral-secondary uppercase tracking-wider mb-4">Navigation</p>
+            <ul class="space-y-1">
+                <li><a href="#palette" class="mobile-nav-link block text-sm py-2 text-neutral-secondary hover:text-neutral-text">Palette des divisions</a></li>
+                <li><a href="#neutres" class="mobile-nav-link block text-sm py-2 text-neutral-secondary hover:text-neutral-text">Couleurs neutres</a></li>
+                <li><a href="#variables" class="mobile-nav-link block text-sm py-2 text-neutral-secondary hover:text-neutral-text">Variables CSS</a></li>
+                <li><a href="#accessibilite" class="mobile-nav-link block text-sm py-2 text-neutral-secondary hover:text-neutral-text">Accessibilité</a></li>
+                <li><a href="#typographie" class="mobile-nav-link block text-sm py-2 text-neutral-secondary hover:text-neutral-text">Typographie</a></li>
+                <li><a href="#logos" class="mobile-nav-link block text-sm py-2 text-neutral-secondary hover:text-neutral-text">Logos</a></li>
+                <li><a href="#regles" class="mobile-nav-link block text-sm py-2 text-neutral-secondary hover:text-neutral-text">Règles d'utilisation</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <main class="flex-1 min-w-0 pb-16 space-y-10">
+
+        <!-- Page title -->
+        <div>
+            <h1 class="text-[2rem] font-heading font-bold text-neutral-text">Charte graphique</h1>
+            <p class="text-neutral-secondary mt-2">Référence visuelle officielle du Centre jurassien d'enseignement et de formation (CEJEF).</p>
+        </div>
+
+        <!-- Section: Palette des divisions -->
+        <section id="palette" class="scroll-mt-24">
+            <h2 class="text-[1.5rem] font-heading font-semibold text-cejef-navy mb-6">Palette des divisions</h2>
+            <p class="text-neutral-secondary text-sm mb-4">Cliquer sur une couleur pour copier le code HEX.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Artisanale -->
+                <div class="swatch bg-white border border-neutral-border rounded-lg overflow-hidden" onclick="copyColor('#003865', this)" role="button" tabindex="0" aria-label="Copier #003865">
+                    <div class="h-24 flex items-end p-3" style="background:#003865">
+                        <span class="text-white text-xs font-semibold font-heading">DIVART</span>
+                    </div>
+                    <div class="p-4">
+                        <p class="font-heading font-semibold text-sm">Artisanale</p>
+                        <p class="text-neutral-secondary text-xs mt-1">Bleu foncé — #003865</p>
+                        <p class="text-neutral-secondary text-xs">Accent DIVART + couleur primaire CEJEF</p>
+                    </div>
+                </div>
+                <!-- Commerciale -->
+                <div class="swatch bg-white border border-neutral-border rounded-lg overflow-hidden" onclick="copyColor('#0053A1', this)" role="button" tabindex="0" aria-label="Copier #0053A1">
+                    <div class="h-24 flex items-end p-3" style="background:#0053A1">
+                        <span class="text-white text-xs font-semibold font-heading">DIVCOM</span>
+                    </div>
+                    <div class="p-4">
+                        <p class="font-heading font-semibold text-sm">Commerciale</p>
+                        <p class="text-neutral-secondary text-xs mt-1">Bleu — #0053A1</p>
+                        <p class="text-neutral-secondary text-xs">Accent DIVCOM</p>
+                    </div>
+                </div>
+                <!-- Lycéenne -->
+                <div class="swatch bg-white border border-neutral-border rounded-lg overflow-hidden" onclick="copyColor('#F28C00', this)" role="button" tabindex="0" aria-label="Copier #F28C00">
+                    <div class="h-24 flex items-end p-3" style="background:#F28C00">
+                        <span class="text-black text-xs font-semibold font-heading">DIVLYC</span>
+                    </div>
+                    <div class="p-4">
+                        <p class="font-heading font-semibold text-sm">Lycéenne</p>
+                        <p class="text-neutral-secondary text-xs mt-1">Orange — #F28C00</p>
+                        <p class="text-neutral-secondary text-xs">Accent DIVLYC</p>
+                    </div>
+                </div>
+                <!-- Santé-Social-Arts -->
+                <div class="swatch bg-white border border-neutral-border rounded-lg overflow-hidden" onclick="copyColor('#CAD400', this)" role="button" tabindex="0" aria-label="Copier #CAD400">
+                    <div class="h-24 flex items-end p-3" style="background:#CAD400">
+                        <span class="text-black text-xs font-semibold font-heading">DIVSSA</span>
+                    </div>
+                    <div class="p-4">
+                        <p class="font-heading font-semibold text-sm">Santé-Social-Arts</p>
+                        <p class="text-neutral-secondary text-xs mt-1">Vert-jaune — #CAD400</p>
+                        <p class="text-neutral-secondary text-xs">Accent DIVSSA</p>
+                    </div>
+                </div>
+                <!-- Technique -->
+                <div class="swatch bg-white border border-neutral-border rounded-lg overflow-hidden" onclick="copyColor('#DF006E', this)" role="button" tabindex="0" aria-label="Copier #DF006E">
+                    <div class="h-24 flex items-end p-3" style="background:#DF006E">
+                        <span class="text-white text-xs font-semibold font-heading">DIVTEC</span>
+                    </div>
+                    <div class="p-4">
+                        <p class="font-heading font-semibold text-sm">Technique</p>
+                        <p class="text-neutral-secondary text-xs mt-1">Rose — #DF006E</p>
+                        <p class="text-neutral-secondary text-xs">Accent DIVTEC</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barres du logo -->
+            <div class="mt-8 bg-white border border-neutral-border rounded-lg p-6">
+                <h3 class="text-[1.25rem] font-heading font-semibold text-neutral-text mb-3">Barres du logo CEJEF</h3>
+                <p class="text-neutral-secondary text-sm mb-4">Les 5 barres verticales du logo utilisent ces couleurs dans l'ordre :</p>
+                <div class="flex gap-2 items-end">
+                    <div class="swatch w-12 h-20 rounded" style="background:#CAD400" onclick="copyColor('#CAD400', this)" role="button" tabindex="0" title="#CAD400 Lime"></div>
+                    <div class="swatch w-12 h-20 rounded" style="background:#F28C00" onclick="copyColor('#F28C00', this)" role="button" tabindex="0" title="#F28C00 Orange"></div>
+                    <div class="swatch w-12 h-20 rounded" style="background:#DF006E" onclick="copyColor('#DF006E', this)" role="button" tabindex="0" title="#DF006E Rose"></div>
+                    <div class="swatch w-12 h-20 rounded" style="background:#0053A1" onclick="copyColor('#0053A1', this)" role="button" tabindex="0" title="#0053A1 Bleu"></div>
+                    <div class="swatch w-12 h-20 rounded" style="background:#003865" onclick="copyColor('#003865', this)" role="button" tabindex="0" title="#003865 Bleu foncé"></div>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <span class="w-12 text-center text-[10px] text-neutral-secondary">Lime</span>
+                    <span class="w-12 text-center text-[10px] text-neutral-secondary">Orange</span>
+                    <span class="w-12 text-center text-[10px] text-neutral-secondary">Rose</span>
+                    <span class="w-12 text-center text-[10px] text-neutral-secondary">Bleu</span>
+                    <span class="w-12 text-center text-[10px] text-neutral-secondary">Navy</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Couleurs neutres -->
+        <section id="neutres" class="scroll-mt-24">
+            <h2 class="text-[1.5rem] font-heading font-semibold text-cejef-navy mb-6">Couleurs neutres</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="swatch bg-white border border-neutral-border rounded-lg overflow-hidden" onclick="copyColor('#1A171B', this)" role="button" tabindex="0" aria-label="Copier #1A171B">
+                    <div class="h-20" style="background:#1A171B"></div>
+                    <div class="p-4">
+                        <p class="font-heading font-semibold text-sm">Noir</p>
+                        <p class="text-neutral-secondary text-xs mt-1">#1A171B</p>
+                        <p class="text-neutral-secondary text-xs">Texte principal, titres</p>
+                    </div>
+                </div>
+                <div class="swatch bg-white border border-neutral-border rounded-lg overflow-hidden" onclick="copyColor('#878787', this)" role="button" tabindex="0" aria-label="Copier #878787">
+                    <div class="h-20" style="background:#878787"></div>
+                    <div class="p-4">
+                        <p class="font-heading font-semibold text-sm">Gris</p>
+                        <p class="text-neutral-secondary text-xs mt-1">#878787</p>
+                        <p class="text-neutral-secondary text-xs">Texte secondaire</p>
+                    </div>
+                </div>
+                <div class="swatch bg-white border border-neutral-border rounded-lg overflow-hidden" onclick="copyColor('#B0B1B3', this)" role="button" tabindex="0" aria-label="Copier #B0B1B3">
+                    <div class="h-20" style="background:#B0B1B3"></div>
+                    <div class="p-4">
+                        <p class="font-heading font-semibold text-sm">Gris clair</p>
+                        <p class="text-neutral-secondary text-xs mt-1">#B0B1B3</p>
+                        <p class="text-neutral-secondary text-xs">Bordures, séparateurs</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Variables CSS -->
+        <section id="variables" class="scroll-mt-24">
+            <h2 class="text-[1.5rem] font-heading font-semibold text-cejef-navy mb-6">Variables CSS</h2>
+            <p class="text-neutral-secondary text-sm mb-4">Variables utilisées dans le projet site CEJEF :</p>
+            <div class="code-block p-6 text-sm font-mono leading-relaxed">
+<pre><span class="text-[#878787]">/* Couleurs des divisions CEJEF */</span>
+<span class="text-[#CAD400]">--cejef-lime</span>: <span class="text-[#e5e7eb]">#CAD400;</span>
+<span class="text-[#F28C00]">--cejef-orange</span>: <span class="text-[#e5e7eb]">#F28C00;</span>
+<span class="text-[#DF006E]">--cejef-pink</span>: <span class="text-[#e5e7eb]">#DF006E;</span>
+<span class="text-[#5b9bd5]">--cejef-blue</span>: <span class="text-[#e5e7eb]">#0053A1;</span>
+<span class="text-[#7bafd4]">--cejef-navy</span>: <span class="text-[#e5e7eb]">#003865;</span>
+
+<span class="text-[#878787]">/* Couleurs neutres */</span>
+<span class="text-[#e5e7eb]">--cejef-black</span>: <span class="text-[#e5e7eb]">#1A171B;</span>
+<span class="text-[#e5e7eb]">--cejef-gray</span>: <span class="text-[#e5e7eb]">#878787;</span>
+<span class="text-[#e5e7eb]">--cejef-gray-light</span>: <span class="text-[#e5e7eb]">#B0B1B3;</span></pre>
+            </div>
+        </section>
+
+        <!-- Section: Accessibilité -->
+        <section id="accessibilite" class="scroll-mt-24">
+            <h2 class="text-[1.5rem] font-heading font-semibold text-cejef-navy mb-6">Accessibilité — Contrastes WCAG</h2>
+            <p class="text-neutral-secondary text-sm mb-4">Contrastes vérifiés entre les couleurs de division et le texte blanc/noir :</p>
+            <div class="bg-white border border-neutral-border rounded-lg overflow-x-auto">
+                <table class="charte-table w-full text-sm">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Couleur</th>
+                            <th class="text-left">Texte blanc</th>
+                            <th class="text-left">Texte noir</th>
+                            <th class="text-left">Recommandation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="flex items-center gap-2">
+                                <span class="inline-block w-4 h-4 rounded" style="background:#003865"></span>
+                                Artisanale #003865
+                            </td>
+                            <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-800">AAA</span></td>
+                            <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-800">AAA</span></td>
+                            <td class="text-neutral-secondary">Texte blanc préféré</td>
+                        </tr>
+                        <tr>
+                            <td class="flex items-center gap-2">
+                                <span class="inline-block w-4 h-4 rounded" style="background:#0053A1"></span>
+                                Commerciale #0053A1
+                            </td>
+                            <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-yellow-100 text-yellow-800">AA</span></td>
+                            <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-800">AAA</span></td>
+                            <td class="text-neutral-secondary">Texte blanc ou noir</td>
+                        </tr>
+                        <tr>
+                            <td class="flex items-center gap-2">
+                                <span class="inline-block w-4 h-4 rounded" style="background:#F28C00"></span>
+                                Lycéenne #F28C00
+                            </td>
+                            <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-red-100 text-red-800">Insuffisant</span></td>
+                            <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-800">AAA</span></td>
+                            <td class="text-neutral-secondary">Texte noir obligatoire</td>
+                        </tr>
+                        <tr>
+                            <td class="flex items-center gap-2">
+                                <span class="inline-block w-4 h-4 rounded" style="background:#CAD400"></span>
+                                SSA #CAD400
+                            </td>
+                            <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-red-100 text-red-800">Insuffisant</span></td>
+                            <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-800">AAA</span></td>
+                            <td class="text-neutral-secondary">Texte noir obligatoire</td>
+                        </tr>
+                        <tr>
+                            <td class="flex items-center gap-2">
+                                <span class="inline-block w-4 h-4 rounded" style="background:#DF006E"></span>
+                                Technique #DF006E
+                            </td>
+                            <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-yellow-100 text-yellow-800">AA</span></td>
+                            <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-800">AAA</span></td>
+                            <td class="text-neutral-secondary">Texte blanc ou noir</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-4 bg-white border border-neutral-border rounded-lg p-4">
+                <p class="text-sm"><strong class="font-heading font-semibold">Objectif :</strong> WCAG AA minimum (contraste 4.5:1), AAA visé (contraste 7:1).</p>
+            </div>
+        </section>
+
+        <!-- Section: Typographie -->
+        <section id="typographie" class="scroll-mt-24">
+            <h2 class="text-[1.5rem] font-heading font-semibold text-cejef-navy mb-6">Typographie</h2>
+
+            <!-- Polices -->
+            <div class="bg-white border border-neutral-border rounded-lg overflow-x-auto mb-6">
+                <table class="charte-table w-full text-sm">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Usage</th>
+                            <th class="text-left">Police</th>
+                            <th class="text-left">Graisse</th>
+                            <th class="text-left">Fallback</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Titres (H1, H2, H3)</td>
+                            <td class="font-heading font-bold">Montserrat</td>
+                            <td>Bold (700) ou Semibold (600)</td>
+                            <td class="text-neutral-secondary">Segoe UI, sans-serif</td>
+                        </tr>
+                        <tr>
+                            <td>Texte courant</td>
+                            <td>Inter</td>
+                            <td>Regular (400)</td>
+                            <td class="text-neutral-secondary">Segoe UI, sans-serif</td>
+                        </tr>
+                        <tr>
+                            <td>Code / technique</td>
+                            <td class="font-mono">JetBrains Mono</td>
+                            <td>Regular (400)</td>
+                            <td class="text-neutral-secondary">Consolas, monospace</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Spécimen vivant -->
+            <div class="bg-white border border-neutral-border rounded-lg p-6 space-y-6">
+                <h3 class="text-[1.25rem] font-heading font-semibold text-neutral-text mb-4">Spécimen typographique</h3>
+
+                <div class="space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 pb-4 border-b border-neutral-border">
+                        <span class="text-xs text-neutral-secondary w-28 shrink-0">H1 — 2rem Bold</span>
+                        <p class="font-heading font-bold text-[2rem] leading-[1.2] text-neutral-text">Centre jurassien d'enseignement</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 pb-4 border-b border-neutral-border">
+                        <span class="text-xs text-neutral-secondary w-28 shrink-0">H2 — 1.5rem Semi</span>
+                        <p class="font-heading font-semibold text-[1.5rem] leading-[1.2] text-cejef-navy">Division artisanale</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 pb-4 border-b border-neutral-border">
+                        <span class="text-xs text-neutral-secondary w-28 shrink-0">H3 — 1.25rem Semi</span>
+                        <p class="font-heading font-semibold text-[1.25rem] leading-[1.2] text-neutral-text">Section secondaire</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 pb-4 border-b border-neutral-border">
+                        <span class="text-xs text-neutral-secondary w-28 shrink-0">Corps — 1rem</span>
+                        <p class="text-[1rem] leading-[1.5] text-neutral-text">Le CEJEF regroupe cinq divisions couvrant l'ensemble de la formation post-obligatoire dans le Canton du Jura. Chaque division dispose de sa propre identité colorimétrique.</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6">
+                        <span class="text-xs text-neutral-secondary w-28 shrink-0">Légende — 0.875rem</span>
+                        <p class="text-[0.875rem] leading-[1.5] text-neutral-secondary">Source : Charte graphique CEJEF, mars 2026.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Règles typo -->
+            <div class="mt-6 bg-white border border-neutral-border rounded-lg p-6">
+                <h3 class="text-[1.25rem] font-heading font-semibold text-neutral-text mb-3">Règles typographiques</h3>
+                <ul class="space-y-2 text-sm text-neutral-text">
+                    <li class="flex gap-2"><span class="text-cejef-navy">&#8226;</span> Interlignage 1.5 pour le texte courant, 1.2 pour les titres</li>
+                    <li class="flex gap-2"><span class="text-cejef-navy">&#8226;</span> Capitales limitées aux labels courts (badges, tags)</li>
+                    <li class="flex gap-2"><span class="text-cejef-navy">&#8226;</span> Utiliser les unités rem/em pour les tailles de texte</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section: Logos -->
+        <section id="logos" class="scroll-mt-24">
+            <h2 class="text-[1.5rem] font-heading font-semibold text-cejef-navy mb-2">Logos</h2>
+            <p class="text-sm text-neutral-secondary mb-6">Formats disponibles : SVG (web), PNG haute résolution (print), PNG moyenne (réseaux sociaux), PNG petite (favicons).</p>
+
+            <!-- Bouton tout télécharger -->
+            <div class="mb-6">
+                <a href="img/logos-cejef.zip" download class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-cejef-navy rounded-lg hover:opacity-90 transition-opacity">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Tout télécharger (ZIP)
+                </a>
+            </div>
+
+            <!-- Logo complet + icône -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div class="bg-white border border-neutral-border rounded-lg p-6 flex flex-col items-center gap-4">
+                    <img src="img/logo-cejef-officiel.svg" alt="Logo CEJEF officiel" class="h-16">
+                    <div class="text-center">
+                        <p class="font-heading font-semibold text-sm">Logo complet</p>
+                        <p class="text-neutral-secondary text-xs mt-1">Min. 120px (web) / 30mm (print)</p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <a href="img/logo-cejef-officiel.svg" download class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-white bg-cejef-navy rounded hover:opacity-90 transition-opacity">SVG</a>
+                        <a href="img/png-large/logo-cejef-large.png" download class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-cejef-navy border border-cejef-navy rounded hover:bg-cejef-navy hover:text-white transition-colors">PNG HD</a>
+                        <a href="img/png-medium/logo-cejef-medium.png" download class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-cejef-navy border border-cejef-navy rounded hover:bg-cejef-navy hover:text-white transition-colors">PNG Medium</a>
+                        <a href="img/png-small/logo-cejef-small.png" download class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-cejef-navy border border-cejef-navy rounded hover:bg-cejef-navy hover:text-white transition-colors">PNG Small</a>
+                    </div>
+                </div>
+                <div class="bg-white border border-neutral-border rounded-lg p-6 flex flex-col items-center gap-4">
+                    <img src="img/icon-cejef.svg" alt="Icône CEJEF" class="h-16">
+                    <div class="text-center">
+                        <p class="font-heading font-semibold text-sm">Icône seule</p>
+                        <p class="text-neutral-secondary text-xs mt-1">Min. 24×24px (web) / 8mm (print)</p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <a href="img/icon-cejef.svg" download class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-white bg-cejef-navy rounded hover:opacity-90 transition-opacity">SVG</a>
+                        <a href="img/png-large/icon-cejef-large.png" download class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-cejef-navy border border-cejef-navy rounded hover:bg-cejef-navy hover:text-white transition-colors">PNG HD</a>
+                        <a href="img/png-medium/icon-cejef-medium.png" download class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-cejef-navy border border-cejef-navy rounded hover:bg-cejef-navy hover:text-white transition-colors">PNG Medium</a>
+                        <a href="img/png-small/icon-cejef-small.png" download class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-cejef-navy border border-cejef-navy rounded hover:bg-cejef-navy hover:text-white transition-colors">PNG Small</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Icônes divisions -->
+            <h3 class="text-[1.25rem] font-heading font-semibold text-neutral-text mb-4">Icônes des divisions</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
+                <div class="bg-white border border-neutral-border rounded-lg p-4 flex flex-col items-center gap-3">
+                    <img src="img/icon-divart.svg" alt="Icône DIVART" class="h-12">
+                    <p class="text-xs font-semibold text-neutral-text">DIVART</p>
+                    <div class="flex flex-wrap justify-center gap-1">
+                        <a href="img/icon-divart.svg" download class="px-2 py-0.5 text-[10px] font-semibold text-white bg-cejef-navy rounded hover:opacity-90 transition-opacity">SVG</a>
+                        <a href="img/png-large/icon-divart-large.png" download class="px-2 py-0.5 text-[10px] font-semibold text-cejef-navy border border-cejef-navy rounded hover:bg-cejef-navy hover:text-white transition-colors">PNG</a>
+                    </div>
+                </div>
+                <div class="bg-white border border-neutral-border rounded-lg p-4 flex flex-col items-center gap-3">
+                    <img src="img/icon-divcom.svg" alt="Icône DIVCOM" class="h-12">
+                    <p class="text-xs font-semibold text-neutral-text">DIVCOM</p>
+                    <div class="flex flex-wrap justify-center gap-1">
+                        <a href="img/icon-divcom.svg" download class="px-2 py-0.5 text-[10px] font-semibold text-white bg-cejef-navy rounded hover:opacity-90 transition-opacity">SVG</a>
+                        <a href="img/png-large/icon-divcom-large.png" download class="px-2 py-0.5 text-[10px] font-semibold text-cejef-navy border border-cejef-navy rounded hover:bg-cejef-navy hover:text-white transition-colors">PNG</a>
+                    </div>
+                </div>
+                <div class="bg-white border border-neutral-border rounded-lg p-4 flex flex-col items-center gap-3">
+                    <img src="img/icon-divlyc.svg" alt="Icône DIVLYC" class="h-12">
+                    <p class="text-xs font-semibold text-neutral-text">DIVLYC</p>
+                    <div class="flex flex-wrap justify-center gap-1">
+                        <a href="img/icon-divlyc.svg" download class="px-2 py-0.5 text-[10px] font-semibold text-white bg-cejef-navy rounded hover:opacity-90 transition-opacity">SVG</a>
+                        <a href="img/png-large/icon-divlyc-large.png" download class="px-2 py-0.5 text-[10px] font-semibold text-cejef-navy border border-cejef-navy rounded hover:bg-cejef-navy hover:text-white transition-colors">PNG</a>
+                    </div>
+                </div>
+                <div class="bg-white border border-neutral-border rounded-lg p-4 flex flex-col items-center gap-3">
+                    <img src="img/icon-divssa.svg" alt="Icône DIVSSA" class="h-12">
+                    <p class="text-xs font-semibold text-neutral-text">DIVSSA</p>
+                    <div class="flex flex-wrap justify-center gap-1">
+                        <a href="img/icon-divssa.svg" download class="px-2 py-0.5 text-[10px] font-semibold text-white bg-cejef-navy rounded hover:opacity-90 transition-opacity">SVG</a>
+                        <a href="img/png-large/icon-divssa-large.png" download class="px-2 py-0.5 text-[10px] font-semibold text-cejef-navy border border-cejef-navy rounded hover:bg-cejef-navy hover:text-white transition-colors">PNG</a>
+                    </div>
+                </div>
+                <div class="bg-white border border-neutral-border rounded-lg p-4 flex flex-col items-center gap-3">
+                    <img src="img/icon-divtec.svg" alt="Icône DIVTEC" class="h-12">
+                    <p class="text-xs font-semibold text-neutral-text">DIVTEC</p>
+                    <div class="flex flex-wrap justify-center gap-1">
+                        <a href="img/icon-divtec.svg" download class="px-2 py-0.5 text-[10px] font-semibold text-white bg-cejef-navy rounded hover:opacity-90 transition-opacity">SVG</a>
+                        <a href="img/png-large/icon-divtec-large.png" download class="px-2 py-0.5 text-[10px] font-semibold text-cejef-navy border border-cejef-navy rounded hover:bg-cejef-navy hover:text-white transition-colors">PNG</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formats recommandés -->
+            <div class="bg-white border border-neutral-border rounded-lg p-6 mb-6">
+                <h3 class="text-[1.25rem] font-heading font-semibold text-neutral-text mb-3">Formats recommandés par contexte</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-[#003865] text-white">
+                                <th class="text-left px-4 py-2 font-semibold">Contexte</th>
+                                <th class="text-left px-4 py-2 font-semibold">Format</th>
+                                <th class="text-left px-4 py-2 font-semibold">Remarque</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-text">
+                            <tr class="border-b border-neutral-border"><td class="px-4 py-2">Site web / Application</td><td class="px-4 py-2">SVG</td><td class="px-4 py-2 text-neutral-secondary">Vectoriel, léger, responsive</td></tr>
+                            <tr class="border-b border-neutral-border"><td class="px-4 py-2">Favicon / PWA</td><td class="px-4 py-2">PNG Small</td><td class="px-4 py-2 text-neutral-secondary">Icône seule, 32×32 ou 192×192</td></tr>
+                            <tr class="border-b border-neutral-border"><td class="px-4 py-2">Document Word / PDF</td><td class="px-4 py-2">PNG HD</td><td class="px-4 py-2 text-neutral-secondary">Haute résolution pour impression</td></tr>
+                            <tr class="border-b border-neutral-border"><td class="px-4 py-2">Présentation PowerPoint</td><td class="px-4 py-2">PNG HD</td><td class="px-4 py-2 text-neutral-secondary">Haute résolution</td></tr>
+                            <tr><td class="px-4 py-2">Réseaux sociaux</td><td class="px-4 py-2">PNG Medium</td><td class="px-4 py-2 text-neutral-secondary">Résolution équilibrée</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Règles logos -->
+            <div class="bg-white border border-neutral-border rounded-lg p-6">
+                <h3 class="text-[1.25rem] font-heading font-semibold text-neutral-text mb-3">Règles d'utilisation des logos</h3>
+                <ul class="space-y-2 text-sm text-neutral-text">
+                    <li class="flex gap-2"><span class="text-cejef-navy">&#8226;</span> Zone de protection : hauteur d'une barre verticale autour du logo</li>
+                    <li class="flex gap-2"><span class="text-cejef-navy">&#8226;</span> Ne jamais déformer, recadrer ou recolorer les logos</li>
+                    <li class="flex gap-2"><span class="text-cejef-navy">&#8226;</span> Utiliser les fichiers SVG pour le web, PNG HD pour l'impression</li>
+                    <li class="flex gap-2"><span class="text-cejef-navy">&#8226;</span> Ne pas placer le logo sur un fond trop chargé</li>
+                    <li class="flex gap-2"><span class="text-cejef-navy">&#8226;</span> Ne jamais recréer les logos — toujours utiliser les fichiers officiels</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section: Règles d'utilisation -->
+        <section id="regles" class="scroll-mt-24">
+            <h2 class="text-[1.5rem] font-heading font-semibold text-cejef-navy mb-6">Règles d'utilisation</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- À faire -->
+                <div class="bg-white border border-neutral-border rounded-lg p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-green-100 text-green-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                        </span>
+                        <h3 class="font-heading font-semibold text-green-800">À faire</h3>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-neutral-text">
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Utiliser les fichiers logo officiels (SVG ou PNG)</li>
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Respecter la zone de protection autour du logo</li>
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Utiliser une seule couleur de division par page</li>
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Privilégier les fonds clairs (#FFFFFF ou #F5F5F5)</li>
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Appliquer la couleur d'accent sur les boutons, liens et tags</li>
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Utiliser Montserrat pour les titres, Inter pour le texte</li>
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Garantir un contraste ≥ 4.5:1 (AA) ou ≥ 7:1 (AAA)</li>
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Tester sur mobile en priorité (mobile-first)</li>
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Utiliser les unités rem/em pour les tailles de texte</li>
+                    </ul>
+                </div>
+
+                <!-- À éviter -->
+                <div class="bg-white border border-neutral-border rounded-lg p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-100 text-red-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </span>
+                        <h3 class="font-heading font-semibold text-red-800">À éviter</h3>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-neutral-text">
+                        <li class="flex gap-2"><span class="text-red-500 shrink-0">&#10007;</span> Déformer, recadrer ou recolorer les logos</li>
+                        <li class="flex gap-2"><span class="text-red-500 shrink-0">&#10007;</span> Placer le logo sur un fond trop chargé</li>
+                        <li class="flex gap-2"><span class="text-red-500 shrink-0">&#10007;</span> Mélanger plusieurs couleurs de divisions</li>
+                        <li class="flex gap-2"><span class="text-red-500 shrink-0">&#10007;</span> Ajouter des dégradés, ombres portées ou effets 3D</li>
+                        <li class="flex gap-2"><span class="text-red-500 shrink-0">&#10007;</span> Utiliser des polices non prévues dans la charte</li>
+                        <li class="flex gap-2"><span class="text-red-500 shrink-0">&#10007;</span> Afficher le logo en dessous de la taille minimale</li>
+                        <li class="flex gap-2"><span class="text-red-500 shrink-0">&#10007;</span> Utiliser des pixels fixes (px) pour les tailles de texte</li>
+                        <li class="flex gap-2"><span class="text-red-500 shrink-0">&#10007;</span> Ignorer les tests d'accessibilité</li>
+                        <li class="flex gap-2"><span class="text-red-500 shrink-0">&#10007;</span> Utiliser les capitales sur des textes longs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Principes de design -->
+            <div class="mt-6 bg-white border border-neutral-border rounded-lg p-6">
+                <h3 class="text-[1.25rem] font-heading font-semibold text-neutral-text mb-3">Principes de design</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                    <div class="flex gap-3">
+                        <span class="text-cejef-navy font-bold text-lg leading-none mt-0.5">1</span>
+                        <div>
+                            <p class="font-semibold">Sobriété</p>
+                            <p class="text-neutral-secondary">Fonds clairs, mise en page aérée</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-cejef-navy font-bold text-lg leading-none mt-0.5">2</span>
+                        <div>
+                            <p class="font-semibold">Pas d'effets</p>
+                            <p class="text-neutral-secondary">Pas de dégradés, ombres portées ou 3D</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-cejef-navy font-bold text-lg leading-none mt-0.5">3</span>
+                        <div>
+                            <p class="font-semibold">Une couleur par page</p>
+                            <p class="text-neutral-secondary">Une seule couleur de division par écran</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-cejef-navy font-bold text-lg leading-none mt-0.5">4</span>
+                        <div>
+                            <p class="font-semibold">Fonds clairs</p>
+                            <p class="text-neutral-secondary">Blanc (#FFFFFF) ou très clair (#F5F5F5)</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-cejef-navy font-bold text-lg leading-none mt-0.5">5</span>
+                        <div>
+                            <p class="font-semibold">Border-radius modéré</p>
+                            <p class="text-neutral-secondary">8px maximum</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-cejef-navy font-bold text-lg leading-none mt-0.5">6</span>
+                        <div>
+                            <p class="font-semibold">Accessibilité</p>
+                            <p class="text-neutral-secondary">WCAG AA minimum, AAA visé</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- Footer -->
+<footer class="border-t border-neutral-border mt-16 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <img src="img/icon-cejef.svg" alt="CEJEF" class="h-6">
+            <span class="text-sm text-neutral-secondary">CEJEF — Centre jurassien d'enseignement et de formation</span>
+        </div>
+        <p class="text-xs text-neutral-secondary">Charte graphique v1.0 — Mars 2026</p>
+    </div>
+</footer>
+
+<script>
+// Copy color to clipboard
+function copyColor(hex, el) {
+    navigator.clipboard.writeText(hex).then(function() {
+        showToast('Copié : ' + hex);
+    }).catch(function() {
+        showToast('Erreur de copie');
+    });
+}
+
+// Toast notification
+function showToast(message) {
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(function() {
+        toast.classList.remove('show');
+    }, 2000);
+}
+
+// Keyboard support for swatches
+document.querySelectorAll('.swatch[role="button"]').forEach(function(swatch) {
+    swatch.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            swatch.click();
+        }
+    });
+});
+
+// Scroll spy for sidebar navigation
+(function() {
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.nav-link');
+
+    function updateActiveLink() {
+        var scrollPos = window.scrollY + 120;
+
+        sections.forEach(function(section) {
+            var top = section.offsetTop;
+            var height = section.offsetHeight;
+            var id = section.getAttribute('id');
+
+            if (scrollPos >= top && scrollPos < top + height) {
+                navLinks.forEach(function(link) {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveLink, { passive: true });
+    updateActiveLink();
+})();
+
+// Mobile navigation
+(function() {
+    var toggle = document.getElementById('menu-toggle');
+    var mobileNav = document.getElementById('mobile-nav');
+    var backdrop = document.getElementById('mobile-nav-backdrop');
+    var links = document.querySelectorAll('.mobile-nav-link');
+
+    function openNav() { mobileNav.classList.remove('hidden'); }
+    function closeNav() { mobileNav.classList.add('hidden'); }
+
+    toggle.addEventListener('click', openNav);
+    backdrop.addEventListener('click', closeNav);
+    links.forEach(function(link) { link.addEventListener('click', closeNav); });
+})();
+</script>
+</body>
+</html>
