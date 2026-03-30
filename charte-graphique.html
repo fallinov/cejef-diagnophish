@@ -614,6 +614,77 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
 <span class="text-[#878787]">/* ===== Barre décorative dégradé CEJEF ===== */</span>
 .bg-gradient-cejef { background: var(--gradient-cejef); }</pre>
             </div>
+
+            <!-- Fichiers de config -->
+            <p class="text-sm font-heading font-semibold text-neutral-text mt-6 mb-2">Tailwind CSS — <code class="val">main.css</code></p>
+            <p class="text-xs text-neutral-secondary mb-3">Couleurs CEJEF + couleur primaire dynamique par division.</p>
+            <div class="code-block p-5 text-xs font-mono leading-relaxed mb-6">
+<pre><span class="text-[#878787]">/* app/assets/css/main.css */</span>
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+:root {
+  <span class="text-[#878787]">/* Couleur primaire — remplacée par JS selon la division */</span>
+  --ui-primary: #003865;
+
+  <span class="text-[#878787]">/* Couleurs divisions CEJEF */</span>
+  --cejef-lime: #CAD400;
+  --cejef-orange: #F28C00;
+  --cejef-pink: #DF006E;
+  --cejef-blue: #0053A1;
+  --cejef-navy: #003865;
+}
+
+@theme {
+  <span class="text-[#878787]">/* Génération automatique des variantes primaires */</span>
+  --color-primary-500: var(--ui-primary);
+  --color-primary-50:  color-mix(in srgb, var(--color-primary-500) 5%, white);
+  --color-primary-100: color-mix(in srgb, var(--color-primary-500) 10%, white);
+  --color-primary-200: color-mix(in srgb, var(--color-primary-500) 25%, white);
+  --color-primary-300: color-mix(in srgb, var(--color-primary-500) 50%, white);
+  --color-primary-400: color-mix(in srgb, var(--color-primary-500) 75%, white);
+  --color-primary-600: color-mix(in srgb, var(--color-primary-500) 90%, black);
+  --color-primary-700: color-mix(in srgb, var(--color-primary-500) 75%, black);
+  --color-primary-800: color-mix(in srgb, var(--color-primary-500) 60%, black);
+  --color-primary-900: color-mix(in srgb, var(--color-primary-500) 45%, black);
+  --color-primary-950: color-mix(in srgb, var(--color-primary-500) 25%, black);
+}</pre>
+            </div>
+
+            <p class="text-sm font-heading font-semibold text-neutral-text mb-2">Nuxt UI — <code class="val">app.config.ts</code></p>
+            <p class="text-xs text-neutral-secondary mb-3">Couleur primaire de base pour les composants Nuxt UI.</p>
+            <div class="code-block p-5 text-xs font-mono leading-relaxed mb-6">
+<pre><span class="text-[#878787]">// app.config.ts</span>
+export default defineAppConfig({
+  ui: {
+    colors: {
+      primary: <span class="text-[#CAD400]">'blue'</span> <span class="text-[#878787]">// Palette bleue — surchargée par --ui-primary en CSS</span>
+    }
+  }
+})</pre>
+            </div>
+
+            <p class="text-sm font-heading font-semibold text-neutral-text mb-2">Nuxt — <code class="val">nuxt.config.ts</code> (extrait)</p>
+            <p class="text-xs text-neutral-secondary mb-3">Modules et configuration minimale pour un projet CEJEF.</p>
+            <div class="code-block p-5 text-xs font-mono leading-relaxed">
+<pre><span class="text-[#878787]">// nuxt.config.ts</span>
+export default defineNuxtConfig({
+  modules: [<span class="text-[#CAD400]">'@nuxt/ui'</span>, <span class="text-[#CAD400]">'@nuxt/icon'</span>, <span class="text-[#CAD400]">'@nuxt/eslint'</span>],
+
+  css: [<span class="text-[#CAD400]">'~/assets/css/main.css'</span>],
+
+  icon: {
+    provider: <span class="text-[#CAD400]">'server'</span>, <span class="text-[#878787]">// Lucide uniquement, self-hosted</span>
+    collections: [<span class="text-[#CAD400]">'lucide'</span>]
+  },
+
+  app: {
+    head: {
+      htmlAttrs: { lang: <span class="text-[#CAD400]">'fr'</span> }
+    }
+  }
+})</pre>
+            </div>
         </div>
 
     </main>
