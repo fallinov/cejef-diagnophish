@@ -142,7 +142,8 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
             <!-- Dégradé 5 couleurs -->
             <h3 class="text-[1.125rem] font-heading font-semibold text-neutral-text mb-3">Dégradé CEJEF</h3>
             <div class="h-3 rounded-full mb-3" style="background:linear-gradient(90deg,#CAD400,#F28C00,#DF006E,#0053A1,#003865)"></div>
-            <p class="text-neutral-secondary text-sm mb-4">Réservé aux barres décoratives (header/footer, 4px) et textes d'accent. Jamais comme fond plein.</p>
+            <p class="text-neutral-secondary text-sm mb-3">Réservé aux barres décoratives (header/footer, 4px) et textes d'accent. Jamais comme fond plein.</p>
+            <p class="text-xs text-neutral-secondary mb-4">Classes utilitaires : <code class="val">.text-gradient</code> (texte), <code class="val">.bg-gradient-cejef</code> (fond), <code class="val">.bg-gradient-cejef-subtle</code> (fond 20%), <code class="val">.border-gradient-cejef</code> (bordure).</p>
 
             <!-- Dégradés bicolores autorisés -->
             <h3 class="text-[1.125rem] font-heading font-semibold text-neutral-text mb-3">Dégradés bicolores autorisés</h3>
@@ -596,8 +597,43 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
   --radius-button: 12px;
   --radius-field: 8px;
 
+  <span class="text-[#878787]">/* ===== Dégradés ===== */</span>
+  --gradient-cejef: linear-gradient(90deg, #CAD400, #F28C00, #DF006E, #0053A1, #003865);
+  --gradient-cta: linear-gradient(135deg, #003865, #0053A1);
+  --gradient-event: linear-gradient(135deg, #0053A1, #b8005b);
+
   <span class="text-[#878787]">/* ===== Primaire dynamique ===== */</span>
   --ui-primary: #000000; <span class="text-[#878787]">/* remplacée par division */</span>
+}
+
+<span class="text-[#878787]">/* ===== Classes utilitaires dégradé CEJEF ===== */</span>
+
+<span class="text-[#878787]">/* Texte en dégradé 5 couleurs */</span>
+.text-gradient {
+  background: var(--gradient-cejef);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+<span class="text-[#878787]">/* Fond dégradé complet */</span>
+.bg-gradient-cejef { background: var(--gradient-cejef); }
+
+<span class="text-[#878787]">/* Fond dégradé subtil (20% opacité) */</span>
+.bg-gradient-cejef-subtle {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, #CAD400 20%, transparent),
+    color-mix(in srgb, #F28C00 20%, transparent),
+    color-mix(in srgb, #DF006E 20%, transparent),
+    color-mix(in srgb, #0053A1 20%, transparent),
+    color-mix(in srgb, #003865 20%, transparent));
+}
+
+<span class="text-[#878787]">/* Bordure dégradé */</span>
+.border-gradient-cejef {
+  background: linear-gradient(#fff, #fff) padding-box,
+              var(--gradient-cejef) border-box;
+  border: 2px solid transparent;
 }</pre>
             </div>
         </div>
