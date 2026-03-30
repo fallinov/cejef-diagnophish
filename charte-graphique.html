@@ -142,16 +142,8 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
             <!-- Dégradé 5 couleurs -->
             <h3 class="text-[1.125rem] font-heading font-semibold text-neutral-text mb-3">Dégradé CEJEF</h3>
             <div class="h-3 rounded-full mb-3" style="background:linear-gradient(90deg,#CAD400,#F28C00,#DF006E,#0053A1,#003865)"></div>
-            <p class="text-neutral-secondary text-sm mb-3">Réservé aux barres décoratives (header/footer, 4px) et textes d'accent. Jamais comme fond plein.</p>
-            <p class="text-xs text-neutral-secondary mb-4">Classes utilitaires : <code class="val">.text-gradient</code> (texte), <code class="val">.bg-gradient-cejef</code> (fond), <code class="val">.bg-gradient-cejef-subtle</code> (fond 20%), <code class="val">.border-gradient-cejef</code> (bordure).</p>
+            <p class="text-neutral-secondary text-sm mb-4">Usage <strong>strictement limité</strong> aux barres décoratives 4px (header haut, footer haut/bas). Jamais comme fond, texte ou bordure de composant.</p>
 
-            <!-- Dégradés bicolores autorisés -->
-            <h3 class="text-[1.125rem] font-heading font-semibold text-neutral-text mb-3">Dégradés bicolores autorisés</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
-                <div class="rounded-xl overflow-hidden"><div class="p-4" style="background:linear-gradient(135deg,#003865,#0053A1)"><p class="text-sm font-bold text-white">Navy → Bleu</p><p class="text-xs text-white/60 mt-1">7.63:1 AAA — CTA global, hero</p></div></div>
-                <div class="rounded-xl overflow-hidden"><div class="p-4" style="background:linear-gradient(135deg,#0053A1,#b8005b)"><p class="text-sm font-bold text-white">Bleu → Rose</p><p class="text-xs text-white/60 mt-1">6.58:1 AA — Événements</p></div></div>
-            </div>
-            <p class="text-xs text-neutral-secondary mb-8">Texte blanc uniquement. Interdit : texte blanc sur dégradé contenant du orange ou du lime.</p>
 
             <!-- Contrastes -->
             <h3 class="text-[1.125rem] font-heading font-semibold text-neutral-text mb-3">Contrastes WCAG</h3>
@@ -183,9 +175,9 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
                 <table class="charte-table w-full text-sm">
                     <thead><tr><th class="text-left">Usage</th><th class="text-left">Police</th><th class="text-left">Graisse</th><th class="text-left">Fallback</th></tr></thead>
                     <tbody>
-                        <tr><td>Titres (H1–H4)</td><td class="font-heading font-bold">Montserrat</td><td>600–700</td><td class="text-neutral-secondary">Segoe UI, sans-serif</td></tr>
-                        <tr><td>Texte courant</td><td>Inter</td><td>400–700</td><td class="text-neutral-secondary">Segoe UI, sans-serif</td></tr>
-                        <tr><td>Code</td><td class="font-mono">JetBrains Mono</td><td>400</td><td class="text-neutral-secondary">Consolas, monospace</td></tr>
+                        <tr><td>Titres (H1–H4)</td><td class="font-heading font-bold"><a href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener" class="text-cejef-blue hover:underline">Montserrat</a></td><td>600–700</td><td class="text-neutral-secondary">Segoe UI, sans-serif</td></tr>
+                        <tr><td>Texte courant</td><td><a href="https://rsms.me/inter/" target="_blank" rel="noopener" class="text-cejef-blue hover:underline">Inter</a></td><td>400–700</td><td class="text-neutral-secondary">Segoe UI, sans-serif</td></tr>
+                        <tr><td>Code</td><td class="font-mono"><a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener" class="text-cejef-blue hover:underline">JetBrains Mono</a></td><td>400</td><td class="text-neutral-secondary">Consolas, monospace</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -251,7 +243,7 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
             <p class="text-neutral-secondary text-xs mb-3">Bouton : toujours pill blanc, texte couleur du fond.</p>
             <!-- CTA global -->
             <div class="rounded-2xl overflow-hidden mb-3" style="box-shadow:0 4px 6px -1px rgb(0 0 0/.05),0 10px 15px -3px rgb(0 0 0/.08)">
-                <div class="px-6 py-5" style="background:linear-gradient(135deg,#003865,#0053A1)">
+                <div class="px-6 py-5" style="background:#003865">
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div class="text-center sm:text-left"><p class="text-lg font-bold text-white">Inscriptions ouvertes — Rentrée 2026</p><p class="text-sm text-white/75">58 formations dans 5 divisions.</p></div>
                         <span class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold" style="color:#003865">S'inscrire</span>
@@ -263,7 +255,7 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
                 <div class="rounded-xl overflow-hidden"><div class="px-5 py-4" style="background:#DF006E"><div class="flex items-center justify-between gap-3"><div><p class="font-bold text-white">DIVTEC</p><p class="text-xs text-white/75">19 formations techniques</p></div><span class="inline-flex rounded-full bg-white px-4 py-2 text-xs font-bold" style="color:#DF006E">Voir</span></div></div></div>
                 <div class="rounded-xl overflow-hidden"><div class="px-5 py-4" style="background:#CAD400"><div class="flex items-center justify-between gap-3"><div><p class="font-bold" style="color:#1A171B">DIVSSA</p><p class="text-xs" style="color:rgba(26,23,27,.6)">11 formations santé, social, arts</p></div><span class="inline-flex rounded-full bg-white px-4 py-2 text-xs font-bold" style="color:#1A171B">Voir</span></div></div></div>
             </div>
-            <p class="text-xs text-neutral-secondary mb-8">Global : dégradé navy→bleu (7.63:1 AAA). Division sombre (DIVART/COM/TEC) : fond division + blanc. Division claire (DIVLYC/SSA) : fond division + noir.</p>
+            <p class="text-xs text-neutral-secondary mb-8">Global : fond navy #003865 (11.98:1 AAA). Division sombre (DIVART/COM/TEC) : fond division + texte blanc. Division claire (DIVLYC/SSA) : fond division + texte noir.</p>
 
             <!-- Header/Footer -->
             <h3 class="text-[1.125rem] font-heading font-semibold text-neutral-text mb-3">Header</h3>
@@ -489,6 +481,9 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
                         <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Conteneur max 1280px, centré</li>
                         <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Respecter <code class="val">prefers-reduced-motion</code></li>
                         <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Glassmorphism : opacité &ge; 70% si texte</li>
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Zones de tap minimum 44×44px (Apple HIG)</li>
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> Ordre de focus logique (tab order = ordre visuel)</li>
+                        <li class="flex gap-2"><span class="text-green-600 shrink-0">&#10003;</span> 5 états interactifs : default, hover, focus, active, disabled</li>
                     </ul>
                 </div>
                 <div class="bg-white border border-gray-200 rounded-2xl p-6">
@@ -563,8 +558,6 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
   <span class="text-[#DF006E]">--cejef-pink</span>: #DF006E;      <span class="text-[#878787]">/* DIVTEC */</span>
   <span class="text-[#5b9bd5]">--cejef-blue</span>: #0053A1;      <span class="text-[#878787]">/* DIVCOM */</span>
   <span class="text-[#7bafd4]">--cejef-navy</span>: #003865;      <span class="text-[#878787]">/* DIVART */</span>
-  --cejef-pink-dark: #b8005b;   <span class="text-[#878787]">/* dégradé bleu→rose */</span>
-
   <span class="text-[#878787]">/* ===== Neutres ===== */</span>
   --cejef-black: #1A171B;
   --cejef-gray: #878787;
@@ -597,44 +590,15 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
   --radius-button: 12px;
   --radius-field: 8px;
 
-  <span class="text-[#878787]">/* ===== Dégradés ===== */</span>
+  <span class="text-[#878787]">/* ===== Dégradé décoratif ===== */</span>
   --gradient-cejef: linear-gradient(90deg, #CAD400, #F28C00, #DF006E, #0053A1, #003865);
-  --gradient-cta: linear-gradient(135deg, #003865, #0053A1);
-  --gradient-event: linear-gradient(135deg, #0053A1, #b8005b);
 
   <span class="text-[#878787]">/* ===== Primaire dynamique ===== */</span>
   --ui-primary: #000000; <span class="text-[#878787]">/* remplacée par division */</span>
 }
 
-<span class="text-[#878787]">/* ===== Classes utilitaires dégradé CEJEF ===== */</span>
-
-<span class="text-[#878787]">/* Texte en dégradé 5 couleurs */</span>
-.text-gradient {
-  background: var(--gradient-cejef);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-<span class="text-[#878787]">/* Fond dégradé complet */</span>
-.bg-gradient-cejef { background: var(--gradient-cejef); }
-
-<span class="text-[#878787]">/* Fond dégradé subtil (20% opacité) */</span>
-.bg-gradient-cejef-subtle {
-  background: linear-gradient(90deg,
-    color-mix(in srgb, #CAD400 20%, transparent),
-    color-mix(in srgb, #F28C00 20%, transparent),
-    color-mix(in srgb, #DF006E 20%, transparent),
-    color-mix(in srgb, #0053A1 20%, transparent),
-    color-mix(in srgb, #003865 20%, transparent));
-}
-
-<span class="text-[#878787]">/* Bordure dégradé */</span>
-.border-gradient-cejef {
-  background: linear-gradient(#fff, #fff) padding-box,
-              var(--gradient-cejef) border-box;
-  border: 2px solid transparent;
-}</pre>
+<span class="text-[#878787]">/* ===== Barre décorative dégradé CEJEF ===== */</span>
+.bg-gradient-cejef { background: var(--gradient-cejef); }</pre>
             </div>
         </div>
 
