@@ -76,6 +76,7 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
                 <li><a href="#editorial" class="nav-link block text-sm py-1.5 pl-3 border-l-2 border-transparent text-neutral-secondary hover:text-neutral-text">Ton éditorial</a></li>
                 <li><a href="#logos" class="nav-link block text-sm py-1.5 pl-3 border-l-2 border-transparent text-neutral-secondary hover:text-neutral-text">Logos</a></li>
                 <li><a href="#regles" class="nav-link block text-sm py-1.5 pl-3 border-l-2 border-transparent text-neutral-secondary hover:text-neutral-text">Règles</a></li>
+                <li><a href="#annexes" class="nav-link block text-sm py-1.5 pl-3 border-l-2 border-transparent text-neutral-secondary hover:text-neutral-text">Annexes</a></li>
             </ul>
         </div>
     </nav>
@@ -92,6 +93,7 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
                 <li><a href="#editorial" class="mobile-nav-link block text-sm py-2 text-neutral-secondary hover:text-neutral-text">Ton éditorial</a></li>
                 <li><a href="#logos" class="mobile-nav-link block text-sm py-2 text-neutral-secondary hover:text-neutral-text">Logos</a></li>
                 <li><a href="#regles" class="mobile-nav-link block text-sm py-2 text-neutral-secondary hover:text-neutral-text">Règles</a></li>
+                <li><a href="#annexes" class="mobile-nav-link block text-sm py-2 text-neutral-secondary hover:text-neutral-text">Annexes</a></li>
             </ul>
         </div>
     </div>
@@ -533,7 +535,7 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
         </section>
 
         <!-- Annexe technique -->
-        <div class="mt-8 pt-6 border-t-2 border-gray-300">
+        <div id="annexes" class="scroll-mt-24 mt-8 pt-6 border-t-2 border-gray-300">
             <p class="text-xs text-neutral-secondary uppercase tracking-wider font-heading font-semibold mb-4">Annexe technique</p>
 
             <!-- Stack -->
@@ -583,14 +585,26 @@ code.val { background: #f1f5f9; padding: .125rem .375rem; border-radius: 4px; fo
   --leading-body: 1.5;
   --leading-heading: 1.2;
 
-  <span class="text-[#878787]">/* ===== Espacement ===== */</span>
+  <span class="text-[#878787]">/* ===== Espacement & dimensions ===== */</span>
   --container-max: 1280px;
   --container-narrow: 672px;
   --radius-card: 16px;
   --radius-button: 12px;
   --radius-field: 8px;
+  --touch-target: 44px;  <span class="text-[#878787]">/* minimum Apple HIG */</span>
+  --header-height: 64px;
+  --color-h2: #003865;   <span class="text-[#878787]">/* navy pour H2 */</span>
 
-  <span class="text-[#878787]">/* ===== Dégradé décoratif ===== */</span>
+  <span class="text-[#878787]">/* ===== Ombres ===== */</span>
+  --shadow:     0 4px 6px -1px rgb(0 0 0/.05),
+                0 10px 15px -3px rgb(0 0 0/.08),
+                0 20px 25px -5px rgb(0 0 0/.05);
+  --shadow-lg:  0 10px 15px -3px rgb(0 0 0/.08),
+                0 25px 50px -12px rgb(0 0 0/.15);
+  --shadow-primary: 0 4px 14px rgb(0 56 101/.25),
+                    0 8px 25px -5px rgb(0 56 101/.15);
+
+  <span class="text-[#878787]">/* ===== Dégradé décoratif (barres 4px uniquement) ===== */</span>
   --gradient-cejef: linear-gradient(90deg, #CAD400, #F28C00, #DF006E, #0053A1, #003865);
 
   <span class="text-[#878787]">/* ===== Primaire dynamique ===== */</span>
