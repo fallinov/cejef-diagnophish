@@ -11,7 +11,7 @@
 
 ```
 index.html              # Rapport de synthese DiagnoPhish
-charte-graphique.html   # Page de reference charte graphique CEJEF
+charte-graphique.html   # Charte graphique CEJEF v2
 libs/
   tailwind.js           # Tailwind Play CDN (copie locale)
 fonts/
@@ -25,32 +25,62 @@ img/
   png-large/              # PNG haute resolution (print)
   png-medium/             # PNG moyenne resolution (reseaux sociaux)
   png-small/              # PNG basse resolution (favicons)
-  logo-cejef.webp         # Ancien logo (non utilise)
-  favicon.svg
-  favicon-32x32.png
 .gitignore               # Exclut playwright/
 ```
 
-## Charte graphique CEJEF
+## Charte graphique CEJEF v2
 
-### Couleurs
-- Divisions : DIVART #003865, DIVCOM #0053A1, DIVLYC #F28C00, DIVSSA #CAD400, DIVTEC #DF006E
-- Neutres : Noir #1A171B (texte), Gris #878787 (secondaire), Gris clair #B0B1B3 (bordures)
-- Fond : #FFFFFF ou #F5F5F5
-
-### Typographie
-- Titres : Montserrat, Bold/Semibold
-- Corps : Inter, Regular
-- H1 2rem Bold #1A171B, H2 1.5rem Semibold #003865, H3 1.25rem Semibold #1A171B
+URL publique : https://fallinov.github.io/cejef-diagnophish/charte-graphique.html
 
 ### Principes
-- Sobriete : pas de degrades, pas d'ombres, pas d'effets 3D
-- Border-radius 8px max, bordures 1px #B0B1B3
-- Tables : en-tetes fond #003865, texte blanc
-- WCAG AAA vise (contrastes >= 7:1)
-- Zero CDN externe — tout est self-hosted
 
-## Donnees
+1. **Minimaliste** — aplats, pas de degrades bicolores
+2. **Accessible** — WCAG AA minimum, AAA vise
+3. **Souverain** — zero CDN externe, tout self-hosted
+4. **Mobile-first** — concevoir pour mobile, enrichir pour desktop
+
+### Couleurs divisions
+
+| Division | Couleur | Texte |
+|----------|---------|-------|
+| DIVART | #003865 (navy) | Blanc (11.98:1 AAA) |
+| DIVCOM | #0053A1 (bleu) | Blanc (7.63:1 AAA) |
+| DIVLYC | #F28C00 (orange) | Noir (8.53:1 AAA) |
+| DIVSSA | #CAD400 (lime) | Noir (12.93:1 AAA) |
+| DIVTEC | #DF006E (rose) | Blanc (4.81:1 AA) |
+
+### Couleurs neutres
+
+- Noir #1A171B (texte), Gris #878787 (secondaire), Gris clair #B0B1B3 (bordures), Fond #F5F5F5
+
+### Regles cles
+
+- CTA global : aplat navy #003865 + texte blanc
+- CTA division sombre (DIVART/COM/TEC) : fond division + texte blanc
+- CTA division claire (DIVLYC/SSA) : fond division + texte noir
+- Degrade 5 couleurs : barres decoratives 4px uniquement (header/footer)
+- Ombres subtiles multicouches (3 niveaux)
+- Radius : 16px (cartes), 12px (boutons), 8px (champs)
+- Conteneur max 1280px, centre
+- Polices : Montserrat (titres), Inter (corps), JetBrains Mono (code) — self-hosted
+- Icones : Lucide uniquement
+- Dark mode obligatoire
+- `prefers-reduced-motion` obligatoire
+- Touch targets minimum 44x44px
+- Interdit : texte blanc sur orange/lime, Liquid Glass, CDN externes, polices fantaisie
+
+### Sections de la charte (8 + annexe)
+
+1. Couleurs (palette + neutres + etats + degrade + contrastes WCAG)
+2. Logos (complet + icone + 5 divisions, SVG + PNG)
+3. Typographie (polices + echelle + regles)
+4. Composants (boutons + cartes + ombres + CTA + header/footer + formulaire)
+5. Images & icones (formats + Lucide + ressources)
+6. Ton editorial (labels + conventions suisses + accroches)
+7. Regles (a faire / a eviter + principes + animations)
+8. Annexes (stack technique + variables CSS completes + configs Tailwind/Nuxt)
+
+## Donnees DiagnoPhish
 
 Toutes les donnees sont **en dur dans `index.html`**. Pas de base de donnees, pas d'API.
 Sources : rapports officiels Navixia SA (PDF).
