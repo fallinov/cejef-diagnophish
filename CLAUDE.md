@@ -11,7 +11,6 @@
 
 ```
 index.html              # Rapport de synthese DiagnoPhish
-charte-graphique.html   # Charte graphique CEJEF v2
 libs/
   tailwind.js           # Tailwind Play CDN (copie locale)
 fonts/
@@ -30,7 +29,7 @@ img/
 
 ## Charte graphique CEJEF v2
 
-URL publique : https://fallinov.github.io/cejef-diagnophish/charte-graphique.html
+> **Déplacée** vers le site CEJEF (repo `2026-CNS-SFA-CRE-Site-CEJEF`, `public/charte/`, servie à `/charte/`). Tokens de référence : `DESIGN.md`. Section conservée ci-dessous à titre historique.
 
 ### Principes
 
